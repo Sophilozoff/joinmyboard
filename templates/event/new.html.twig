@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Nouvel évènement{% endblock %}
+
+{% block jquery %}
+<script>
+    //function for datepicker and timepicker in materialize
+    $(document).ready(function () {
+        console.log('work');
+        var currYear = (new Date()).getFullYear();
+        //format, language
+        $('.datepicker').datepicker({
+            yearRange: [currYear, currYear + 1],
+            format: "dd mmmm yyyy",
+            i18n: {
+                months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+                monthsShort: ["Jan", "Fév", "Mar", "Avr", "Mai", "Jun", "Jui", "Aoû", "Sep", "Oct", "Nov", "Déc"],
+                weekdays: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+                weekdaysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+                weekdaysAbbrev: ["D", "L", "M", "M", "J", "V", "S"]
+            }
+        });
+        //format 24 hours
+        $('.timepicker').timepicker({
+            twelveHour: false,
+        }
+        //function for activate select input in materialize
+        );
+        $('select').formSelect();
+    });
+</script>
+{% endblock %}
+
+{% block main %}
+<h1>Créer un nouvel évènement</h1>
+
+{{ include('event/_form.html.twig') }}
+
+<a href="{{ path('event_index') }}">back to list</a>
+{% endblock %}

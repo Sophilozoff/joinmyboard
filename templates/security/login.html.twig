@@ -1,0 +1,204 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+{% block jquery %}
+<script>
+    $(document).ready(function () {
+        $('.carousel.carousel-slider').carousel({
+            indicators: false
+        });
+        autoplay();
+        function autoplay() {
+            $('.carousel').carousel('next');
+            setTimeout(autoplay, 4000);
+        }
+    });
+</script>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="card">
+
+        <div id="carousel-connection" class="row valign-wrapper">
+            <!-- CAROUSEL -->
+            <div class="col s12 m6">
+
+                <div class="carousel carousel-slider">
+                    <div class="carousel-item red lighten-2 white-text" href="#one">
+                        <img src="{{ asset("/img/carousel1.jpg" )}}" alt="">
+                    </div>
+                    <div class="carousel-item red lighten-2 white-text" href="#two!">
+                        <img src="{{ asset("/img/carousel2.jpg" )}}" alt="">
+                    </div>
+                    <div class="carousel-item red lighten-2 white-text" href="#three!">
+                        <img src="{{ asset("/img/carousel3.jpg" )}}" alt="">
+                    </div>
+                    <div class="carousel-item red lighten-2 white-text" href="#four!">
+                        <img src="{{ asset("/img/carousel4.jpg" )}}" alt="">
+                    </div>
+                </div>
+            </div>
+            <!-- END CAROUSEL -->
+
+            <!-- CONNECTION -->
+            <div class="col s12 m6">
+
+                <form method="post">
+                    {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                    <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
+                    <label for="inputUsername">Indentifiant</label>
+                    <input type="text" value="{{ last_username }}" name="username" id="inputUsername"
+                        class="form-control" required autofocus>
+                    <label for="inputPassword">Mot de passe</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" required>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    {#
+                    Uncomment this section and add a remember_me option below your firewall to activate remember me
+                    functionality.
+                    See https://symfony.com/doc/current/security/remember_me.html
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Remember me
+                        </label>
+                    </div>
+                    #}
+
+                    <button class="btn btn-lg btn-primary" type="submit">
+                        Se connecter
+                    </button>
+                </form>
+            </div>
+            <!-- END CONNECTION -->
+        </div>
+
+        <!-- h2 -->
+        <div id="inscription" class="card center #004d40 teal darken-2">
+            <h3 class="grey-text text-lighten-2">Rejoins des évènements jeux <br>
+                <br>
+                et rencontre de nouveaux joueurs !
+            </h3>
+            <a href="{{ path('user_new') }}" id="inscription-button" class="center btn btn-lg #004d40 teal lighten-5 grey-text text-darken-3" type="submit">
+                INSCRIPTION
+            </a>
+        </div>
+
+        <!-- BANNER -->
+        <div id="resumeHome" class="row">
+            <div class="card-panel z-depth-2 col s12 m4 l4 center">
+                <i class="large material-icons teal-text">event</i><br>
+                <span class="teal-text flow-text">
+                    Organise tes soirées jeux !
+                </span>
+            </div>
+
+            <div class="card-panel z-depth-2 col s12 m4 l4 center">
+                <i class="large material-icons teal-text">extension</i><br>
+                <span class="teal-text flow-text">
+                    Sélectionne tes jeux préférés !
+                </span>
+            </div>
+            <div class="card-panel z-depth-2 col s12 m4 l4 center">
+                <i class="large material-icons teal-text">mood</i><br>
+                <span class="teal-text flow-text">
+                    Fais-toi plein de nouveaux amis !
+                </span>
+            </div>
+        </div>
+        <!-- END BANNER -->
+
+        {% endblock %}
+
+        {% block stylesheets %}
+        <style>
+            #formInscription, #inscription {
+                box-shadow: 0 0 2em grey;
+            }
+            #cardTitle {
+                font-size: 2em;
+                margin-bottom: 50px;
+                color: whitesmoke;
+                letter-spacing: 3px;
+                border-radius: 5px;
+                box-shadow: 0 0 0.2em grey;
+            }
+            .carousel-item img {
+                height: 100%;
+            }
+            div.carousel.carousel-slider {
+                margin-bottom: -10px;
+            }
+            #formConnexion button {
+                margin: 20px;
+            }
+            #formConnexion {
+                padding-right: 30px;
+            }
+            #inscription {
+                padding: 20px 0;
+                text-shadow: 0 0 0.5em rgb(48, 48, 48);
+            }
+            #inscription-button {
+                box-shadow: 0 0 0.5em rgb(48, 48, 48);
+                padding: 0 50px;
+                margin: 20px 0;
+                text-shadow: none;
+            }
+            #inscription-button:hover {
+                font-size: 1.2em;
+            }
+            #resumeHome {
+                display: flex;
+                justify-content: space-between;
+            }
+            .card-resumeHome {
+                box-shadow: 0 0 0.5em rgb(109, 108, 108);
+                border: 0.5px solid rgb(207, 207, 207);
+                border-radius: 5px;
+                margin: 30px 0;
+                padding: 20px;
+                width: 30%;
+            }
+            .card-resumeHome i {
+                transform: scale(1);
+                animation: pulse 2s infinite;
+            }
+
+            @keyframes pulse {
+                0% {
+                    transform: scale(0.95);
+                }
+                70% {
+                    transform: scale(1);
+                }
+                100% {
+                    transform: scale(0.95);
+                }
+            }
+            @media screen and(max-width: 640px) {
+                #resumeHome {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                }
+                .card-resumeHome {
+                    width: 100%;
+                }
+            }
+            @media screen and(max-width: 1240px) {
+                #resumeHome {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                }
+                .card-resumeHome {
+                    width: 100%;
+                }
+            }
+        </style>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{{ include('front/navbar.html.twig') }}
+<div class="container">
+{% block main %}{% endblock %}
+</div>
+{{ include('front/footer.html.twig') }}
+{% endblock %}
