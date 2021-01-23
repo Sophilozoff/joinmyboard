@@ -18,9 +18,8 @@
 
 {% block body %}
 <div class="container">
-    <div class="card">
 
-        <div id="carousel-connection" class="row valign-wrapper">
+        <div id="carousel-connection" class="card row valign-wrapper">
             <!-- CAROUSEL -->
             <div class="col s12 m6">
 
@@ -83,7 +82,8 @@
                 <br>
                 et rencontre de nouveaux joueurs !
             </h3>
-            <a href="{{ path('user_new') }}" id="inscription-button" class="center btn btn-lg #004d40 teal lighten-5 grey-text text-darken-3" type="submit">
+            <a href="{{ path('user_new') }}" id="inscription-button"
+                class="center btn btn-lg #004d40 teal lighten-5 grey-text text-darken-3" type="submit">
                 INSCRIPTION
             </a>
         </div>
@@ -111,14 +111,17 @@
             </div>
         </div>
         <!-- END BANNER -->
+</div>
+        {{ include('front/footer.html.twig') }}
 
         {% endblock %}
-
         {% block stylesheets %}
         <style>
-            #formInscription, #inscription {
+            #formInscription,
+            #inscription {
                 box-shadow: 0 0 2em grey;
             }
+
             #cardTitle {
                 font-size: 2em;
                 margin-bottom: 50px;
@@ -127,43 +130,54 @@
                 border-radius: 5px;
                 box-shadow: 0 0 0.2em grey;
             }
+
             .carousel-item img {
                 height: 100%;
             }
+
             div.carousel.carousel-slider {
                 margin-bottom: -10px;
             }
+
             #formConnexion button {
                 margin: 20px;
             }
+
             #formConnexion {
                 padding-right: 30px;
             }
+
             #inscription {
                 padding: 20px 0;
                 text-shadow: 0 0 0.5em rgb(48, 48, 48);
+                margin: 200px 0;
             }
+
             #inscription-button {
                 box-shadow: 0 0 0.5em rgb(48, 48, 48);
                 padding: 0 50px;
                 margin: 20px 0;
                 text-shadow: none;
             }
+
             #inscription-button:hover {
                 font-size: 1.2em;
             }
+
             #resumeHome {
                 display: flex;
                 justify-content: space-between;
+                margin: 200px 0;
             }
+
             .card-resumeHome {
                 box-shadow: 0 0 0.5em rgb(109, 108, 108);
                 border: 0.5px solid rgb(207, 207, 207);
                 border-radius: 5px;
-                margin: 30px 0;
                 padding: 20px;
                 width: 30%;
             }
+
             .card-resumeHome i {
                 transform: scale(1);
                 animation: pulse 2s infinite;
@@ -173,32 +187,38 @@
                 0% {
                     transform: scale(0.95);
                 }
+
                 70% {
                     transform: scale(1);
                 }
+
                 100% {
                     transform: scale(0.95);
                 }
             }
+
             @media screen and(max-width: 640px) {
                 #resumeHome {
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
                 }
+
                 .card-resumeHome {
                     width: 100%;
                 }
             }
+
             @media screen and(max-width: 1240px) {
                 #resumeHome {
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
                 }
+
                 .card-resumeHome {
                     width: 100%;
                 }
             }
         </style>
-{% endblock %}
+        {% endblock %}

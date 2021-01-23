@@ -2,6 +2,19 @@
 
 {% block title %}Nouvel évènement{% endblock %}
 
+{% block stylesheets %}
+<style>
+.container-form{
+    border: 1px solid rgb(6, 166, 194);
+    margin: 5vh auto;
+    border-radius: 5px;
+}
+body{
+    background-color:#4db6ac;
+}
+</style>
+{% endblock %}
+
 {% block jquery %}
 <script>
     //function for datepicker and timepicker in materialize
@@ -32,9 +45,13 @@
 {% endblock %}
 
 {% block main %}
-<h1>Créer un évènement</h1>
+<div class="container container-form z-depth-4 grey lighten-5">
+    <div class="container">
+    <h1>Créer un évènement</h1>
 
 {{ include('event/_form.html.twig') }}
 
 <a href="{{ path('event_index') }}">back to list</a>
+</div>
+</div>
 {% endblock %}

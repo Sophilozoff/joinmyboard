@@ -1,0 +1,21 @@
+{% block stylesheets %}
+<style>
+#logo{
+    width: 10%;
+    height: 10%;
+    margin-left : 20%;
+}
+#title{
+    margin: auto;
+    font-size: 3.7em;
+    font-family: "Good Morning";
+    margin: 50px;
+}
+</style>
+{% endblock %}
+<div class="container-fluid red lighten-2">   
+    <div class="row hide-on-med-and-down" >
+        <img id="logo" class="col s3" src="{{ asset("/img/logoTest.png" )}}"> 
+        <a id="title" href="{{ path('user_index') }}" class="col s6 hide-on-med-and-down amber-text text-lighten-3">Join My Board</a>
+    </div>
+</div>

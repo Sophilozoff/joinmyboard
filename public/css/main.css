@@ -1,0 +1,17 @@
+/* FONTS */
+@font-face {
+    font-family: "Good Morning";
+    src: url("../fonts/GoodMorning.ttf");
+}
+@font-face {
+    font-family: "Quicksand Regular";
+    src: url("../fonts/Quicksand-Regular.ttf");
+}
+@font-face {
+    font-family: "RedHatDisplay Regular";
+    src: url("../fonts/RedHatDisplay-Regular.ttf");
+}
+
+body{
+    font-family: "Quicksand Regular";
+}
