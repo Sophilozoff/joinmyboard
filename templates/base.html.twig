@@ -22,8 +22,10 @@
 </head>
 
 <body>
+    <header>
+        {{ include('front/header.html.twig') }}
+    </header>
     
-    {{ include('front/header.html.twig') }}
     {% block jquery %}{% endblock %}
     {% block body %}{% endblock %}
 </body>

@@ -2,8 +2,10 @@
 
 {% block body %}
 {{ include('front/navbar.html.twig') }}
-<div class="container">
+<main class="container">
 {% block main %}{% endblock %}
-</div>
+</main>
+<footer>
 {{ include('front/footer.html.twig') }}
+</footer>
 {% endblock %}
