@@ -35,7 +35,7 @@
                     <li><a href="#"><i class="material-icons left">date_range</i>Mes soirées</a></li>
                     <!-- Si je suis connecté en tant qu'admin -->
                     {% if is_granted("ROLE_ADMIN") %}
-                    <li><a href="{{ path('user_index') }}"><i class="material-icons left">dvr</i>Espace admin</a></li>
+                    <li><a href="{{ path('app_index') }}"><i class="material-icons left">dvr</i>Espace admin</a></li>
                     {% endif %}
                     <li><a href="{{ path('app_logout') }}"><i class="material-icons left">exit_to_app</i>Déconnexion</a></li>
                     {% endif %}
