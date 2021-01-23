@@ -16,7 +16,7 @@
     <!-- LOGO + TITRE DU SITE -->
     <div class="valign-wrapper row hide-on-med-and-down" >
         <img id="logo" class="col s3" src="{{ asset("/img/logoTest.png" )}}"> 
-        <a id="title" href="{{ path('user_index') }}" class="col s6 hide-on-med-and-down amber-text text-lighten-3">Join My Board</a>
+        <a id="title" href="{{ path('app_index') }}" class="col s6 hide-on-med-and-down amber-text text-lighten-3">Join My Board</a>
     </div>
     <!-- LOGO + TITRE END -->
     <!-- NAVBAR -->
@@ -35,7 +35,7 @@
                     <li><a href="#"><i class="material-icons left">date_range</i>Mes soirées</a></li>
                     <!-- Si je suis connecté en tant qu'admin -->
                     {% if is_granted("ROLE_ADMIN") %}
-                    <li><a href="{{ path('app_index') }}"><i class="material-icons left">dvr</i>Espace admin</a></li>
+                    <li><a href="{{ path('user_index') }}"><i class="material-icons left">dvr</i>Espace admin</a></li>
                     {% endif %}
                     <li><a href="{{ path('app_logout') }}"><i class="material-icons left">exit_to_app</i>Déconnexion</a></li>
                     {% endif %}

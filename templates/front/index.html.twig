@@ -2,5 +2,27 @@
 
 {% block main %}
 <h1>Bienvenue sur JoinmyBoard {{ app.user }}</h1>
+<h4>Les prochaines évènements</h4>
+<div class="row">
+{% for event in events %}
 
+    <div class="col s12 m6 l4">
+        <div class="card">
+            <div class="card-image">
+                <img src="images/sample-1.jpg" alt="{{ event.title }}">
+                <span class="card-title">{{ event.title }}</span>
+                <!-- <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a> -->
+            </div>
+            <div class="card-content">
+                <!-- le pipe U;truncate permet d'afficher les 150 premiers caractères, de finir par ... et de ne pas couper le dernier mot -->
+                <p>{{ event.description|u.truncate(150, "...", false) }}</p>
+            </div>
+            <div class="card-action">
+                <a href="#">This is a link</a>
+            </div>
+        </div>
+    </div>
+
+{% endfor %}
+</div>
 {% endblock %}

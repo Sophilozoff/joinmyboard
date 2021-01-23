@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +16,12 @@ class FrontController extends AbstractController
      * @Route("/accueil", name="app_index")
      * IsGranted("ROLE_USER", "ROLE_ADMIN")
      */
-    public function index()
+    public function index(EventRepository $eventRepository): Response
     {
+        $events = $eventRepository->findAll();
         return $this->render('front/index.html.twig', [
-            'controller_name' => 'FrontController'
+            'controller_name' => 'FrontController',
+            'events' => $events
         ]);
     }
 
