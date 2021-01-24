@@ -1,4 +1,47 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+
+<div>
+    {{ form_label(form.username, "Identifiant") }}
+    {{ form_row(form.username) }}
+</div>
+
+<!-- MOT DE PASSE -->
+<div>
+    {{ form_label(form.password, "Mot de passe") }}
+    {{ form_row(form.password) }}
+</div>
+
+<!-- ROLE -->
+{% if is_granted("ROLE_ADMIN") %}
+<div>
+    {{ form_label(form.roles, "Rôle") }}
+    {{ form_row(form.roles) }}
+</div>
+{% endif %}
+
+<!-- ADRESSE EMAIL -->
+<div>
+    {{ form_label(form.email, "Adresse email") }}
+    {{ form_row(form.email) }}
+</div>
+
+<!-- GENRE -->
+<div>
+    {{ form_label(form.sex, "Genre") }}
+    {{ form_widget(form.sex, { 'attr': {'class': 'browser-default'} }) }}
+</div>
+
+<div>
+    {{ form_label(form.dateOfBirth, "Date de naissance") }}
+    {{ form_row(form.dateOfBirth) }}
+</div>
+<div>
+    {{ form_label(form.avatar, "Photo de profil") }}
+    {{ form_row(form.avatar) }}
+</div>
+<div>
+    {{ form_row(form.description) }}
+</div>
+    <button class="btn">{{ button_label|default('Valider') }}</button>
 {{ form_end(form) }}
