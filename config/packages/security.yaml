@@ -23,7 +23,7 @@ security:
                     - App\Security\UserAuthenticator
             logout:
                 path: app_logout
-                # where to redirect after logout
+                target: app_index
                 # target: app_any_route
 
             # activate different ways to authenticate
