@@ -19,10 +19,16 @@ class FrontController extends AbstractController
      */
     public function index(EventRepository $eventRepository): Response
     {
-        $events = $eventRepository->findAll();
+        //Récupérer tous les events du plus vieux au plus lointain
+        // $events = $eventRepository->findBy([], ["dateEvent"=>"ASC"]);
+        $eventsPrev = $eventRepository->findPrevEvents();
+        $eventsNext = $eventRepository->findNextEvents();
+        
+
         return $this->render('front/index.html.twig', [
             'controller_name' => 'FrontController',
-            'events' => $events
+            'eventsNext' => $eventsNext,
+            'eventsPrev' => $eventsPrev
         ]);
     }
 

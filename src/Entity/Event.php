@@ -25,14 +25,9 @@ class Event
     private $title;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="date")
      */
-    private $datePicked;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $timePicked;
+    private $dateEvent;
 
     /**
      * @ORM\Column(type="integer")
@@ -81,26 +76,14 @@ class Event
         return $this;
     }
 
-    public function getDatePicked():?string
+    public function getDateEvent(): ?\DateTimeInterface
     {
-        return $this->datePicked;
+        return $this->dateEvent;
     }
 
-    public function setDatePicked(string $datePicked): self
+    public function setDateEvent(\DateTimeInterface $dateEvent): self
     {
-        $this->datePicked = $datePicked;
-
-        return $this;
-    }
-
-    public function getTimePicked(): ?string
-    {
-        return $this->timePicked;
-    }
-
-    public function setTimePicked(string $timePicked): self
-    {
-        $this->timePicked = $timePicked;
+        $this->dateEvent = $dateEvent;
 
         return $this;
     }

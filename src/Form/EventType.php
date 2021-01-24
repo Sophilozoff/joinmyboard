@@ -6,22 +6,21 @@ use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 class EventType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('title')
-            ->add('datePicked', null, [
-                'attr' => ['class' => 'datepicker'],
-            ])
-            ->add('timePicked', null, [
-                'attr' => ['class' => 'timepicker'],
-            ])
+            ->add('dateEvent', DateType::class, [
+                'widget' => 'single_text',
+                'html5' => false,
+                'format' => 'dd-mm-yyyy',
+                'attr' => ['class' => 'datepicker']])
             ->add('nbMaxPlayers')
             ->add('image')
+            ->add('description')
         ;
     }
 

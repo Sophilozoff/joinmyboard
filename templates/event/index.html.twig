@@ -9,10 +9,10 @@
             <tr>
                 <th>Id</th>
                 <th>Title</th>
-                <th>DatePicked</th>
-                <th>TimePicked</th>
-                <th>NbMaxPlayers</th>
+                <th>Date</th>
+                <th>NbMaxPlayers/th>
                 <th>Image</th>
+                <th>Description</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -21,10 +21,10 @@
             <tr>
                 <td>{{ event.id }}</td>
                 <td>{{ event.title }}</td>
-                <td>{{ event.datePicked }}</td>
-                <td>{{ event.timePicked }}</td>
+                <td>{{ event.dateEvent|date('d-m-y') }}</td>
                 <td>{{ event.nbMaxPlayers }}</td>
                 <td>{{ event.image }}</td>
+                <td>{{ event.description }}</td>
                 <td>
                     <a href="{{ path('event_show', {'id': event.id}) }}">show</a>
                     <a href="{{ path('event_edit', {'id': event.id}) }}">edit</a>
