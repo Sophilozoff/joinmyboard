@@ -29,7 +29,7 @@ class UserType extends AbstractType
                     "Masculin"=>"M",
                     "Non binaire"=>"NB"
                 ],
-                "multiple"=>false,
+                "multiple"=>false
             ])
             ->add('dateOfBirth', null, [
                 'label'=>false

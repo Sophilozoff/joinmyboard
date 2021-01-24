@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 class EventType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -21,8 +23,18 @@ class EventType extends AbstractType
                 'html5' => false,
                 'format' => 'dd-mm-yyyy',
                 'attr' => ['class' => 'datepicker']])
-            ->add('nbMaxPlayers', null, [
-                'label'=>false
+            ->add('nbMaxPlayers', ChoiceType::class, [
+                'label'=>false,
+                "choices"=>[
+                    "2"=>"2",
+                    "3"=>"3",
+                    "4"=>"4",
+                    "5"=>"5",
+                    "6"=>"6",
+                    "7"=>"7",
+                    "8"=>"8",
+                ],
+                "multiple"=>false
             ])
             ->add('image', null, [
                 'label'=>false
