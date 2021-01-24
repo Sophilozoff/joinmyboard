@@ -6,53 +6,13 @@
 <h4>Les prochains évènements</h4>
 <div class="row">
 {% for event in eventsNext %}
-
-    <div class="col s12 m6 l4">
-        <div class="card">
-            <div class="card-image">
-                <img src="{{ event.image }}" alt="{{ event.title }}">
-                <span class="card-title">{{ event.title }}</span>
-                <!-- <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a> -->
-            </div>
-            <div class="card-content">
-                <p class="card-text">{{ event.dateEvent|date("d/m/Y")}} à </p>
-                <!-- le pipe U;truncate permet d'afficher les 150 premiers caractères, de finir par ... et de ne pas couper le dernier mot -->
-                <p class="card-text">{{ event.description|u.truncate(150, "...", false) }}</p>
-                {% if event.participant|length < event.nbMaxPlayers %}
-                <p class="card-text">Places restantes : {{ event.participant|length }}/{{ event.nbMaxPlayers }}</p>
-                {% else %}
-                <p>Complet</p>
-                {% endif %}
-            </div>
-            <div class="card-action">
-                <a href="#">This is a link</a>
-            </div>
-        </div>
-    </div>
-
+{{ include("event/_event_block.html.twig")}}
 {% endfor %}
 </div class="container-fluid">
 <h4>Les anciens évènements</h4>
 <div class="row">
-    {% for event in eventsPrev %}
-    <div class="col s12 m6 l4">
-        <div class="card">
-            <div class="card-image">
-                <img src="{{ event.image }}" alt="{{ event.title }}">
-                <span class="card-title">{{ event.title }}</span>
-                <!-- <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a> -->
-            </div>
-            <div class="card-content">
-                <p class="card-text">{{ event.dateEvent|date("d/m/Y")}} à </p>
-                <!-- le pipe U;truncate permet d'afficher les 150 premiers caractères, de finir par ... et de ne pas couper le dernier mot -->
-                <p class="card-text">{{ event.description|u.truncate(150, "...", false) }}</p>                
-            </div>
-            <div class="card-action">
-                <a href="#">This is a link</a>
-            </div>
-        </div>
-    </div>
-
+{% for event in eventsPrev %}
+{{ include("event/_event_block.html.twig")}}
 {% endfor %}
 </div>
 </div>
