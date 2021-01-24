@@ -1,19 +1,40 @@
 {% extends 'layout.html.twig' %}
 
 {% block main %}
+
 <h1>Bienvenue sur JoinmyBoard {{ app.user }}</h1>
+
+{% block stylesheets %}
+<style>
+    .alert-success{
+        background-color: #64ffda;
+        border: 2px #059481  solid;
+        border-radius: 5px;
+        padding: 10px;
+        text-align: center;
+        font-size: 1.3em;
+    }
+</style>
+{% endblock %}
+
+
+
 <div class="container-fluid">
-<h4>Les prochains évènements</h4>
-<div class="row">
-{% for event in eventsNext %}
-{{ include("event/_event_block.html.twig")}}
-{% endfor %}
-</div class="container-fluid">
-<h4>Les anciens évènements</h4>
-<div class="row">
-{% for event in eventsPrev %}
-{{ include("event/_event_block.html.twig")}}
-{% endfor %}
+    <h4>Les prochains évènements</h4>
+    <div class="row">
+        {% for event in eventsNext %}
+        {{ include("event/_event_block.html.twig")}}
+        {% endfor %}
+    </div>
 </div>
+
+<div class="container-fluid"></div>
+    <h4>Les anciens évènements</h4>
+    <div class="row">
+
+        {% for event in eventsPrev %}
+        {{ include("event/_event_block.html.twig")}}
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

@@ -42,7 +42,7 @@ class Event
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="events")
      */
-    private $participant;
+    private $subscriber;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="organizedEvents")
@@ -115,23 +115,23 @@ class Event
     /**
      * @return Collection|User[]
      */
-    public function getParticipant(): Collection
+    public function getSubscriber(): Collection
     {
-        return $this->participant;
+        return $this->subscriber;
     }
 
-    public function addParticipant(User $participant): self
+    public function addSubscriber(User $subscriber): self
     {
-        if (!$this->participant->contains($participant)) {
-            $this->participant[] = $participant;
+        if (!$this->subscriber->contains($subscriber)) {
+            $this->subscriber[] = $subscriber;
         }
 
         return $this;
     }
 
-    public function removeParticipant(User $participant): self
+    public function removeSubscriber(User $subscriber): self
     {
-        $this->participant->removeElement($participant);
+        $this->subscriber->removeElement($subscriber);
 
         return $this;
     }

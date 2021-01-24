@@ -57,7 +57,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="participant")
+     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="subscriber")
      */
     private $events;
 
@@ -208,7 +208,7 @@ class User implements UserInterface
     {
         if (!$this->events->contains($event)) {
             $this->events[] = $event;
-            $event->addParticipant($this);
+            $event->addSubscriber($this);
         }
 
         return $this;
@@ -217,7 +217,7 @@ class User implements UserInterface
     public function removeEvent(Event $event): self
     {
         if ($this->events->removeElement($event)) {
-            $event->removeParticipant($this);
+            $event->removeSubscriber($this);
         }
 
         return $this;

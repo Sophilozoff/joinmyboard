@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Entity\Event;
 use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -59,6 +60,36 @@ class FrontController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/subscription/{id}", name="front_sub_event")
+     * @IsGranted("ROLE_USER")
+     *
+     * @return void
+     */
+    public function subscribe(Event $event){
+        //on récupère l'utilisateur
+        $user = $this->getUser();
+        //On l'ajoute aux subscribers
+        $event->addSubscriber($user);
+        $this->getDoctrine()->getManager()->flush();
+        $this->addFlash('success', "Inscription réussie");
+        return $this->redirectToRoute("app_index");
+    }
 
+    /**
+     * @Route("/unsubscription/{id}", name="front_unsub_event")
+     * @IsGranted("ROLE_USER")
+     *
+     * @return void
+     */
+    public function unSubscribe(Event $event){
+        //on récupère l'utilisateur
+        $user = $this->getUser();
+        //On l'ajoute aux subscribers
+        $event->removeSubscriber($user);
+        $this->getDoctrine()->getManager()->flush();
+        $this->addFlash('success', "Vous êtes bien désinscrit");
+        return $this->redirectToRoute("app_index");
+    }
 
 }
