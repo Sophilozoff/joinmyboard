@@ -18,7 +18,11 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $admin = new User();
-        $admin->setUsername("admin")->setRoles(["ROLE_ADMIN"])->setPassword($this->encoder->encodePassword($admin, "mdp"))->setDateOfBirth("16/07/1987");
+        $admin->setUsername("admin")
+        ->setRoles(["ROLE_ADMIN"])
+        ->setEmail("lallemandsophie@free.fr")
+        ->setPassword($this->encoder->encodePassword($admin, "mdp"))
+        ->setDateOfBirth("16/07/1987");
         
         $manager->persist($admin);
         $manager->flush();
