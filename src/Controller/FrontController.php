@@ -9,12 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class FrontController extends AbstractController
 {
     /**
      * @Route("/accueil", name="app_index")
-     * IsGranted("ROLE_USER", "ROLE_ADMIN")
+     * @IsGranted("ROLE_USER")
      */
     public function index(EventRepository $eventRepository): Response
     {
