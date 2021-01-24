@@ -7,9 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @Vich\Uploadable
  */
 class User implements UserInterface
 {
@@ -45,6 +47,37 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;
+
+    /**
+     * @Vich\UploadableField(mapping="avatar_small_file", fileNameProperty="avatarSmall", size="avatarSmallSize")
+     */
+    private $avatarSmallFile;
+
+    /**
+     * @Vich\UploadableField(mapping="avatar_big_file", fileNameProperty="avatarBig", size="avatarBigSize")
+     */
+    private $avatarBigFile;
+
+    /**
+     * @ORM\Column(type="integer")
+     *
+     * @var int|null
+     */
+    private $avatarSmallSize;
+    
+    /**
+     * @ORM\Column(type="integer")
+     *
+     * @var int|null
+     */
+    private $avatarBigSize;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTimeInterface|null
+     */
+    private $updatedAt;
 
     /**
      * @ORM\Column(type="text", nullable=true)
