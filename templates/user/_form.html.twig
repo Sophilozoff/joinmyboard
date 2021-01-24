@@ -1,6 +1,6 @@
 {{ form_start(form) }}
 
-
+<!-- IDENTIFIANT -->
 <div>
     {{ form_label(form.username, "Identifiant") }}
     {{ form_row(form.username) }}
@@ -32,14 +32,19 @@
     {{ form_widget(form.sex, { 'attr': {'class': 'browser-default'} }) }}
 </div>
 
+<!-- DATE DE NAISSANCE -->
 <div>
     {{ form_label(form.dateOfBirth, "Date de naissance") }}
     {{ form_row(form.dateOfBirth) }}
 </div>
+
+<!-- PHOTO DE PROFIL -->
 <div>
     {{ form_label(form.avatar, "Photo de profil") }}
     {{ form_row(form.avatar) }}
 </div>
+
+<!-- DESCRIPTION -->
 <div>
     {{ form_row(form.description) }}
 </div>

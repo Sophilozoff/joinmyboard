@@ -1,4 +1,33 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+
+<!-- TITRE -->
+<div>
+    {{ form_label(form.title, "Titre") }}
+    {{ form_row(form.title) }}
+</div>
+
+<!-- DATE -->
+<div>
+    {{ form_label(form.dateEvent, "Date") }}
+    {{ form_row(form.dateEvent) }}
+</div>
+
+<!-- NB MAX JOUEURS -->
+<div>
+    {{ form_label(form.nbMaxPlayers, "Nombre maximum de participants") }}
+    {{ form_row(form.nbMaxPlayers) }}
+</div>
+
+<!-- IMAGE -->
+<div>
+    {{ form_label(form.image, "Image") }}
+    {{ form_row(form.image) }}
+</div>
+
+<!-- DESCRIPTION -->
+<div>
+    {{ form_label(form.description, "Image") }}
+    {{ form_row(form.description) }}
+</div>
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

@@ -12,15 +12,24 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
+            ->add('title', null, [
+                'label'=>false
+            ])
             ->add('dateEvent', DateType::class, [
+                'label'=>false,
                 'widget' => 'single_text',
                 'html5' => false,
                 'format' => 'dd-mm-yyyy',
                 'attr' => ['class' => 'datepicker']])
-            ->add('nbMaxPlayers')
-            ->add('image')
-            ->add('description')
+            ->add('nbMaxPlayers', null, [
+                'label'=>false
+            ])
+            ->add('image', null, [
+                'label'=>false
+            ])
+            ->add('description', null, [
+                'label'=>false
+            ])
         ;
     }
 
