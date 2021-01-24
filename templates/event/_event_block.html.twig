@@ -6,13 +6,7 @@
             <!-- <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a> -->
         </div>
         <div class="card-content">
-            {% for key, messages in app.flashes %}
-<div class="alert-{{key}}">
-    {% for msg in messages %}
-    {{ msg }}
-    {% endfor %}
-</div>
-{% endfor %}
+
             <p class="card-text">{{ event.dateEvent|date("d/m/Y")}} à </p>
             <p>Organisé par : {{ event.author }}</p>
             <!-- le pipe u.truncate permet d'afficher les 150 premiers caractères, de finir par ... et de ne pas couper le dernier mot -->
@@ -20,7 +14,7 @@
 
             <!-- si event à venir et avec des places libres -->
             {% if event.dateEvent > date() and event.subscriber|length < event.nbMaxPlayers %}
-            <p class="card-text">Places restantes : {{ event.subscriber|length }}/{{ event.nbMaxPlayers }}</p>
+            <p class="card-text">Nombre de participants : {{ event.subscriber|length }}/{{ event.nbMaxPlayers }}</p>
             <!-- si complet -->
             {% elseif event.subscriber|length >= event.nbMaxPlayers %}
             <p>Complet</p>

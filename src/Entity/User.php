@@ -66,6 +66,11 @@ class User implements UserInterface
      */
     private $organizedEvents;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $sex;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -249,6 +254,18 @@ class User implements UserInterface
                 $organizedEvent->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSex(): ?string
+    {
+        return $this->sex;
+    }
+
+    public function setSex(?string $sex): self
+    {
+        $this->sex = $sex;
 
         return $this;
     }
