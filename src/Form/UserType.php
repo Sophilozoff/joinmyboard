@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -17,11 +18,23 @@ class UserType extends AbstractType
             ->add('username', null, [
                 'label'=>false
             ])
-            ->add('password', null, [
+            ->add('password', PasswordType::class, [
                 'label'=>false
             ])
             ->add('email', null, [
                 'label'=>false
+            ])
+            ->add('roles', ChoiceType::class, [
+                'label'=>false,
+                "choices"=>[
+                    "Admin"=>"ROLE_ADMIN",
+                    "User"=>"ROLE_USER"
+                ],
+                'expanded'=> true,
+                'multiple'=> true,
+                "choice_attr"=>function(){
+                    return["type"=>"radio"];
+                }
             ])
             ->add('sex', ChoiceType::class, [
                 'label'=> false,

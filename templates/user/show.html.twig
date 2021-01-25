@@ -1,46 +1,48 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}Profil de {{ user.username }}{% endblock %}
 
-{% block body %}
-    <h1>User</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>DateOfBirth</th>
-                <td>{{ user.dateOfBirth ? user.dateOfBirth|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Avatar</th>
-                <td>{{ user.avatar }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ user.description }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('user_index') }}">back to list</a>
+{% block main %}
 
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+<div class="profile-card card">
+    <div class="container">
+        <h1>Profil de {{ user.username }}</h1>
+        <div class="photo-show-profile">
+            <img src="{{ asset('/img/avatars/'~ user.avatar )}}" alt="photo de {{ user.username }}">
+        </div>
+        {% if is_granted ("ROLE_ADMIN")%}
+        <div> id : {{ user.id }}</div>
+        <div> rôle : {{ user.roles ? user.roles|json_encode : '' }}</div>
+        {% endif %}
+        <div> Date de naissance : {{ user.dateOfBirth }}</div>
+        <div> Description : {{ user.description }}</div>
 
-    {{ include('user/_delete_form.html.twig') }}
+        <a href="{{ path('user_index') }}">back to list</a>
+        {% if app.user.id == user.id %}
+        <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+        {{ include('user/_delete_form.html.twig') }}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .photo-show-profile img {
+        width: inherit;
+        height: inherit;
+    }
+
+    .photo-show-profile {
+        display: inline-block;
+        border: 2px solid rgb(8, 136, 130);
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+</style>
 {% endblock %}
