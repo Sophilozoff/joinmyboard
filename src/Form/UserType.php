@@ -7,7 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -34,10 +35,10 @@ class UserType extends AbstractType
             ->add('dateOfBirth', null, [
                 'label'=>false
             ])
-            ->add('avatar', null, [
+            ->add('avatarFile', VichImageType::class, [
                 'label'=>false
             ])
-            ->add('description', null, [
+            ->add('description', TextType::class, [
                 'label'=>false
             ]);
             if($options['isAdmin']){
@@ -58,7 +59,6 @@ class UserType extends AbstractType
         ;
     }
     
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

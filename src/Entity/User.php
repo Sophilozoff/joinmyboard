@@ -50,6 +50,19 @@ class User implements UserInterface
     private $avatar;
 
     /**
+    * @Vich\UploadableField(mapping="avatar", fileNameProperty="avatar")
+    *
+    */
+    private $avatarFile;
+
+    /**
+    * @ORM\Column(type="datetime")
+    *
+    * @var \DateTimeInterface|null
+    */
+    private $updatedAt;
+    
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
@@ -227,7 +240,6 @@ class User implements UserInterface
         if ($this->events->removeElement($event)) {
             $event->removeSubscriber($this);
         }
-
         return $this;
     }
 
@@ -245,7 +257,6 @@ class User implements UserInterface
             $this->organizedEvents[] = $organizedEvent;
             $organizedEvent->setAuthor($this);
         }
-
         return $this;
     }
 
@@ -273,4 +284,29 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getAvatarFile(): ?File
+    {
+        return $this->avatarFile;
+    }
+
+    public function setAvatarFile(?File $file): self
+    {
+        $this->avatarFile = $file;
+        if($file !==null){
+            $this->updatedAt = new \DateTimeImmutable;
+        }
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
 }
