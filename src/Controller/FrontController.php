@@ -13,6 +13,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+/**
+ * @Route("/front")
+ * @IsGranted("ROLE_USER")
+ */
 class FrontController extends AbstractController
 {
     private $encoder;
@@ -24,7 +28,7 @@ class FrontController extends AbstractController
 
     /**
      * @Route("/accueil", name="app_index")
-     * @IsGranted("ROLE_USER")
+     *
      */
     public function index(EventRepository $eventRepository): Response
     {
@@ -41,36 +45,8 @@ class FrontController extends AbstractController
         ]);
     }
 
-    
-    /**
-     * @Route("/inscription", name="user_inscription", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword( 
-                $this->encoder->encodePassword( $user, $user->getPassword() )
-            );
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_login');
-        }
-
-        return $this->render('user/new.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
-    }
-
     /**
      * @Route("/subscription/{id}", name="front_sub_event")
-     * @IsGranted("ROLE_USER")
      *
      * @return void
      */
@@ -86,7 +62,6 @@ class FrontController extends AbstractController
 
     /**
      * @Route("/unsubscription/{id}", name="front_unsub_event")
-     * @IsGranted("ROLE_USER")
      *
      * @return void
      */

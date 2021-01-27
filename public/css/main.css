@@ -12,6 +12,11 @@
     src: url("../fonts/RedHatDisplay-Regular.ttf");
 }
 
+/* FONTS STYLE */
 body{
     font-family: "Quicksand Regular";
 }
+.text{
+    font-size: 1.3em;;
+}
+

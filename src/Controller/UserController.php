@@ -14,7 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/user")
- * @IsGranted("ROLE_ADMIN")
+ * 
  */
 class UserController extends AbstractController
 {
@@ -37,8 +37,8 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="user_new", methods={"GET","POST"})
-     * @IsGranted("ROLE_ADMIN")
+     * @Route("/inscription", name="user_new", methods={"GET","POST"})
+     * @
      */
     public function new(Request $request): Response
     {
@@ -66,7 +66,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}", name="user_show", methods={"GET"})
-     * @IsGranted("ROLE_ADMIN")
+     * 
      */
     public function show(User $user): Response
     {
@@ -77,7 +77,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
-     * @IsGranted("ROLE_ADMIN")
+     * 
      */
     public function edit(Request $request, User $user): Response
     {

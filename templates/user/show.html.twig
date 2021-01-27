@@ -6,23 +6,22 @@
 
 {% block main %}
 
-<div class="profile-card card">
+<div class="profile-card card z-depth-4">
     <div class="container">
         <h1>Profil de {{ user.username }}</h1>
         <div class="photo-show-profile">
             <img src="{{ asset('/img/avatars/'~ user.avatar )}}" alt="photo de {{ user.username }}">
         </div>
         {% if is_granted ("ROLE_ADMIN")%}
-        <div> id : {{ user.id }}</div>
-        <div> rôle : {{ user.roles ? user.roles|json_encode : '' }}</div>
+        <div class="text"> id : {{ user.id }}</div>
+        <div class="text"> rôle : {{ user.roles ? user.roles|json_encode : '' }}</div>
         {% endif %}
-        <div> Date de naissance : {{ user.dateOfBirth }}</div>
-        <div> Description : {{ user.description }}</div>
+        <div class="text"> Date de naissance : {{ user.dateOfBirth }}</div>
+        <div class="text"> Description : {{ user.description }}</div>
 
-        <a href="{{ path('user_index') }}">back to list</a>
         {% if app.user.id == user.id %}
-        <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-        {{ include('user/_delete_form.html.twig') }}
+            <a class="btn  lime darken-3" href="{{ path('user_edit', {'id': user.id}) }}">MODIFIER</a>
+            {{ include('user/_delete_form.html.twig') }}
         {% endif %}
     </div>
 </div>
@@ -31,6 +30,9 @@
 
 {% block stylesheets %}
 <style>
+    .profile-card{
+        padding: 5% 0;
+    }
     .photo-show-profile img {
         width: inherit;
         height: inherit;

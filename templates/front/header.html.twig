@@ -28,7 +28,7 @@
                     <!-- Si je suis connecté -->
                     {% if app.user != null %}
                     <li><a href="{{ path('app_index') }}"><i class="material-icons left">home</i>Page d'accueil</a></li>
-                    <li><a href="#"><i class="material-icons left">account_circle</i>Mon profil</a></li>
+                    <li><a href="{{ path('user_show', {'id': app.user.id}) }}"><i class="material-icons left">account_circle</i>Mon profil</a></li>
                     <li><a href="{{ path('event_new') }}"><i class="material-icons left">create</i>Créer un évènement</a></li>
                     <li><a href="#"><i class="material-icons left">group</i>Ma liste d'amis</a></li>
                     <li><a href="#"><i class="material-icons left">casino</i>Ma ludothèque</a></li>
@@ -46,7 +46,7 @@
             <!-- Si je suis connecté -->
             {% if app.user != null %}
             <li><a href="{{ path('app_index') }}"><i class="material-icons left">home</i>Page d'accueil</a></li>
-            <li><a href="#"><i class="material-icons left">account_circle</i>Mon profil</a></li>
+            <li><a href="{{ path('user_show', {'id': app.user.id}) }}"><i class="material-icons left">account_circle</i>Mon profil</a></li>
             <li><a href="{{ path('event_new') }}"><i class="material-icons left">create</i>Créer un évènement</a></li>
             <li><a href="#"><i class="material-icons left">group</i>Ma liste d'amis</a></li>
             <li><a href="#"><i class="material-icons left">casino</i>Ma ludothèque</a></li>
