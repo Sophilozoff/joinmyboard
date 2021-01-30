@@ -193,6 +193,32 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getAvatarFile(): ?File
+    {
+        return $this->avatarFile;
+    }
+
+    public function setAvatarFile(?File $file): self
+    {
+        $this->avatarFile = $file;
+        if($file !==null){
+            $this->updatedAt = new \DateTimeImmutable;
+        }
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
     public function getDescription(): ?string
     {
         return $this->description;
@@ -284,29 +310,5 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAvatarFile(): ?File
-    {
-        return $this->avatarFile;
-    }
 
-    public function setAvatarFile(?File $file): self
-    {
-        $this->avatarFile = $file;
-        if($file !==null){
-            $this->updatedAt = new \DateTimeImmutable;
-        }
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
 }

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -36,7 +37,7 @@ class EventType extends AbstractType
                 ],
                 "multiple"=>false
             ])
-            ->add('image', null, [
+            ->add('imageFile', VichImageType::class, [
                 'label'=>false
             ])
             ->add('description', null, [
