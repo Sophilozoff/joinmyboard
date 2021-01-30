@@ -3,11 +3,19 @@
 {% block title %}Modifier mon profil{% endblock %}
 
 {% block main %}
-    <h1>Edit User</h1>
+<div class="container edit-form z-depth-4">
+    <h1>Modifier mon profil</h1>
+    <div class="container-fluid row">
+        <div class="col s6">
+    {{ include('user/_form.html.twig', {'button_label': 'Éditer'}) }}
 
-    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('user_index') }}">>Retour</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+</div>
+{% endblock %}
+{% block stylesheets %}
+<style>
+    .edit-form {
+        padding: 2%;
+        margin: 2% auto;
+    }
+</style>
 {% endblock %}

@@ -39,9 +39,9 @@ class UserType extends AbstractType
             ->add('sex', ChoiceType::class, [
                 'label'=> false,
                 "choices"=>[
-                    "Féminin"=>"F",
-                    "Masculin"=>"M",
-                    "Non binaire"=>"NB"
+                    "Féminin"=>"Féminin",
+                    "Masculin"=>"Masculin",
+                    "Non binaire"=>"Non binaire"
                 ],
                 "multiple"=>false
             ])

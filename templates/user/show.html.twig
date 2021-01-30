@@ -32,12 +32,13 @@
         <h2>Info admin :</h2>
         <div> id : {{ user.id }}</div>
         <div> rôle : {{ user.roles ? user.roles|json_encode : '' }}</div>
-        <div class="text"> Date de naissance : {{ user.dateOfBirth }}</div>
+        <div> Date de naissance : {{ user.dateOfBirth }}</div>
     </div>
     {% endif %}
     <div class="text description">
         <h2>Description : </h2>
         <p>{{ user.description }}</p>
+        <p>Genre : {{ user.sex }}</p>
     </div>
 
     {% if app.user.id == user.id %}
@@ -57,6 +58,9 @@
 
 {% block stylesheets %}
 <style>
+    h2{
+        font-size: 1.2em;
+    }
     .profile {
         border-radius: 5px;
         padding-bottom: 2%;
@@ -70,7 +74,7 @@
     }
 
     .number {
-        padding: 5px;
+        padding: 10px;
         border-radius: 50%;
     }
 
