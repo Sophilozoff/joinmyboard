@@ -23,7 +23,7 @@ class EventType extends AbstractType
                 'label'=>false,
                 'widget' => 'single_text',
                 'html5' => false,
-                'format' => 'dd-mm-yyyy',
+                'format' => 'dd-MM-yyyy',
                 'attr' => ['class' => 'datepicker']])
                 ->add('timeEvent', TimeType::class, [
                     'label'=>false,

@@ -2,8 +2,25 @@
 
 {% block main %}
 
-<h1>Bienvenue sur JoinmyBoard {{ app.user }}</h1>
+<div class="container-fluid">
+    <h4 class="teal darken-1">Les prochains évènements</h4>
+    <div class="row">
+        {% for event in eventsNext %}
+        {{ include("event/_event_block.html.twig")}}
+        {% endfor %}
+    </div>
+</div>
 
+<div class="container-fluid"></div>
+    <h4 class="teal darken-1">Les anciens évènements</h4>
+    <div class="row">
+
+        {% for event in eventsPrev %}
+        {{ include("event/_event_block.html.twig")}}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
 {% block stylesheets %}
 <style>
     .alert-success{
@@ -14,27 +31,10 @@
         text-align: center;
         font-size: 1.3em;
     }
+h4{
+    padding: 10px 40px;
+    border-radius: 25px;
+    color: whitesmoke;
+}
 </style>
-{% endblock %}
-
-
-
-<div class="container-fluid">
-    <h4>Les prochains évènements</h4>
-    <div class="row">
-        {% for event in eventsNext %}
-        {{ include("event/_event_block.html.twig")}}
-        {% endfor %}
-    </div>
-</div>
-
-<div class="container-fluid"></div>
-    <h4>Les anciens évènements</h4>
-    <div class="row">
-
-        {% for event in eventsPrev %}
-        {{ include("event/_event_block.html.twig")}}
-        {% endfor %}
-    </div>
-</div>
 {% endblock %}

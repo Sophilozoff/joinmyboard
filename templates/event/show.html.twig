@@ -1,42 +1,24 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block title %}Event{% endblock %}
+{% block title %}{{ event.title}}{% endblock %}
 
-{% block body %}
+{% block main %}
+<div class="container">
     <h1>Event</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ event.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ event.title }}</td>
-            </tr>
-            <tr>
-                <th>DatePicked</th>
-                <td>{{ event.datePicked ? event.datePicked|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>TimePicked</th>
-                <td>{{ event.timePicked ? event.timePicked|date('H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>NbMaxPlayers</th>
-                <td>{{ event.nbMaxPlayers }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ event.image }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('event_index') }}">back to list</a>
 
-    <a href="{{ path('event_edit', {'id': event.id}) }}">edit</a>
-
+    {% if app.user == event.author %}
+    <div class="container-fluid row valign-wrapper">
+        <div class="col s6">
+    <a class="btn lime darken-1" href="{{ path('event_edit', {'id': event.id}) }}">MODIFIER</a>
+</div>
+<div class="col s6">
     {{ include('event/_delete_form.html.twig') }}
+</div>
+
+</div>
+    {% endif %}
+</div>
+
 {% endblock %}

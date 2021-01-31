@@ -2,12 +2,17 @@
     <div class="card z-depth-4">
         <div class="card-image">
             <img src="{{ asset('/img/images/'~ event.image )}}" alt="{{ event.title }}">
-            <span class="card-title">{{ event.title }}</span>
+            <span class="card-title title">{{ event.title }}</span>
             <!-- <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a> -->
         </div>
         <div class="card-content">
             <div class="row">
-                <p class="card-text col s6">Le {{ event.dateEvent|date("d/m/Y")}} à {{ event.timeEvent|date('H:i')}}</p>
+                <p class="card-text col s6">
+                    {% if event.dateEvent|date("d/m/Y") == "now"|date('d/m/Y') %} 
+                    Aujourd'hui
+                    {% else %}
+                    Le {{ event.dateEvent|date("d/m/Y")}} à {{ event.timeEvent|date('H:i')}}</p>
+                    {% endif %}  
                 <p class="col s6">Organisé par : {{ event.author }}</p>
             </div>
 
@@ -23,7 +28,7 @@
                 {% endif %}
         </div>
         <div class="card-action text">
-            <a href="#">Voir l'évènement</a>
+            <a href="{{ path('event_show', {'id': event.id}) }}">Voir l'évènement</a>
         </div>
 
         <div>
@@ -41,3 +46,18 @@
 
     </div>
 </div>
+
+{% block stylesheets %}
+<style>
+    .card .card-image .card-title{
+    background-color:#059481;
+    border-radius: 35px;
+    border: whitesmoke 3px solid;
+    padding: 5px 15px;
+}
+.card-image{
+    max-height: 300px;
+    max-width: 500px;
+}
+</style>
+{% endblock %}
