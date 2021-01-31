@@ -1,40 +1,42 @@
 <div class="col s12 m6 l4">
-    <div class="card">
+    <div class="card z-depth-4">
         <div class="card-image">
-            <img src="{{ event.image }}" alt="{{ event.title }}">
+            <img src="{{ asset('/img/images/'~ event.image )}}" alt="{{ event.title }}">
             <span class="card-title">{{ event.title }}</span>
             <!-- <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a> -->
         </div>
         <div class="card-content">
+            <div class="row">
+                <p class="card-text col s6">Le {{ event.dateEvent|date("d/m/Y")}} à {{ event.timeEvent|date('H:i')}}</p>
+                <p class="col s6">Organisé par : {{ event.author }}</p>
+            </div>
 
-            <p class="card-text">{{ event.dateEvent|date("d/m/Y")}} à </p>
-            <p>Organisé par : {{ event.author }}</p>
             <!-- le pipe u.truncate permet d'afficher les 150 premiers caractères, de finir par ... et de ne pas couper le dernier mot -->
-            <p class="card-text">Description : {{ event.description|u.truncate(150, "...", false) }}</p>
+            <p class="card-text">Description : {{ event.description|u.truncate(100, "...", false) }}</p>
 
             <!-- si event à venir et avec des places libres -->
-            {% if event.dateEvent > date() and event.subscriber|length < event.nbMaxPlayers %}
-            <p class="card-text">Nombre de participants : {{ event.subscriber|length }}/{{ event.nbMaxPlayers }}</p>
-            <!-- si complet -->
-            {% elseif event.subscriber|length >= event.nbMaxPlayers %}
-            <p>Complet</p>
-            {% endif %}
+            {% if event.dateEvent > date() and event.subscriber|length < event.nbMaxPlayers %} <p class="card-text">
+                Nombre de participants : {{ event.subscriber|length }}/{{ event.nbMaxPlayers }}</p>
+                <!-- si complet -->
+                {% elseif event.subscriber|length >= event.nbMaxPlayers %}
+                <p>Complet</p>
+                {% endif %}
         </div>
-        <div class="card-action">
+        <div class="card-action text">
             <a href="#">Voir l'évènement</a>
         </div>
 
         <div>
-        <!-- S'il l'évènement est à venir -->
-        {% if event.dateEvent > date() and app.user != event.author %}
+            <!-- S'il l'évènement est à venir -->
+            {% if event.dateEvent > date() and app.user != event.author %}
             <!-- Si utilisater connecté et déjà dans la lsite des participants -->
             {% if app.user and app.user in event.subscriber %}
-            <a href="{{ path("front_unsub_event", {"id":event.id})}}" class="btn red darken-3">Se désinscrire</a>
-                <!-- S'il reste des places -->
-                {% elseif event.subscriber|length < event.nbMaxPlayers %}
-                <a href="{{ path("front_sub_event", {"id":event.id})}}" class="btn">S'inscrire</a>
+            <a href="{{ path(" front_unsub_event", {"id":event.id})}}" class="btn red darken-3">Se désinscrire</a>
+            <!-- S'il reste des places -->
+            {% elseif event.subscriber|length < event.nbMaxPlayers %} <a href="{{ path(" front_sub_event",
+                {"id":event.id})}}" class="btn">S'inscrire</a>
                 {% endif %}
-            {% endif %}
+                {% endif %}
         </div>
 
     </div>

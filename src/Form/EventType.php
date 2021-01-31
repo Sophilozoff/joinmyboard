@@ -9,6 +9,7 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 
 class EventType extends AbstractType
 {
@@ -24,6 +25,11 @@ class EventType extends AbstractType
                 'html5' => false,
                 'format' => 'dd-mm-yyyy',
                 'attr' => ['class' => 'datepicker']])
+                ->add('timeEvent', TimeType::class, [
+                    'label'=>false,
+                    'widget' => 'single_text',
+                    'html5' => false,
+                    'attr' => ['class' => 'timepicker']])
             ->add('nbMaxPlayers', ChoiceType::class, [
                 'label'=>false,
                 "choices"=>[

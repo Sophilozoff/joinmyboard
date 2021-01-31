@@ -12,6 +12,12 @@
     {{ form_row(form.dateEvent) }}
 </div>
 
+<!-- HEURE -->
+<div>
+    {{ form_label(form.timeEvent, "Heure") }}
+    {{ form_row(form.timeEvent) }}
+</div>
+
 <!-- NB MAX JOUEURS -->
 <div>
     {{ form_label(form.nbMaxPlayers, "Nombre maximum de participants") }}
@@ -26,7 +32,7 @@
 
 <!-- DESCRIPTION -->
 <div>
-    {{ form_label(form.description, "Image") }}
+    {{ form_label(form.description, "Description") }}
     {{ form_row(form.description) }}
 </div>
     <button class="btn">{{ button_label|default('Save') }}</button>

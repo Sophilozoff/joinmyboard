@@ -70,6 +70,11 @@ class Event
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="time")
+     */
+    private $timeEvent;
+
     public function __construct()
     {
         $this->participant = new ArrayCollection();
@@ -198,6 +203,18 @@ class Event
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getTimeEvent(): ?\DateTimeInterface
+    {
+        return $this->timeEvent;
+    }
+
+    public function setTimeEvent(\DateTimeInterface $timeEvent): self
+    {
+        $this->timeEvent = $timeEvent;
 
         return $this;
     }
