@@ -3,16 +3,27 @@
 namespace App\Form;
 
 use App\Entity\Event;
+use App\Entity\Bar;
+use App\Repository\BarRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 
 class EventType extends AbstractType
 {
+
+    private $barRepository;
+
+    public function __construct(BarRepository $barRepository)
+    {
+        $this->barRepository = $barRepository;
+    }
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -49,6 +60,12 @@ class EventType extends AbstractType
             ->add('description', null, [
                 'label'=>false
             ])
+            ->add('location', EntityType::class, [
+                'class' => Bar::class,
+                'label'=>false,
+                'choices' =>[$this->barRepository->findAll()],
+                "multiple"=>false,
+                ])
         ;
     }
 

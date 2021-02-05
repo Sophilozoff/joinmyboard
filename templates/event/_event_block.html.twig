@@ -15,7 +15,7 @@
                     {% endif %}  
                 <p class="col s6">Organisé par : {{ event.author }}</p>
             </div>
-
+            <p class="card-text">Lieu : {{event.location}}</p>
             <!-- le pipe u.truncate permet d'afficher les 150 premiers caractères, de finir par ... et de ne pas couper le dernier mot -->
             <p class="card-text">Description : {{ event.description|u.truncate(100, "...", false) }}</p>
 

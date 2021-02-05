@@ -35,5 +35,11 @@
     {{ form_label(form.description, "Description") }}
     {{ form_row(form.description) }}
 </div>
+
+<!-- LOCATION -->
+<div>
+    {{ form_label(form.location, "Lieu") }}
+    {{ form_row(form.location) }}
+</div>
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

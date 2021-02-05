@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AddressRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,11 @@ class Address
      * @ORM\OneToOne(targetEntity=Bar::class, mappedBy="address", cascade={"persist", "remove"})
      */
     private $bar;
+
+    public function __toString()
+    {
+        return $this->street;
+    }
 
     public function getId(): ?int
     {
@@ -111,4 +118,6 @@ class Address
 
         return $this;
     }
+
+
 }

@@ -27,6 +27,11 @@ class Bar
      * @ORM\JoinColumn(nullable=false)
      */
     private $address;
+    
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     public function getId(): ?int
     {
