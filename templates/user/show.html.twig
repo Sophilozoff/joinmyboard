@@ -8,12 +8,23 @@
 
 <div class="container z-depth-4 profile">
     <div class="header-profile container-fluid teal lighten-2 center">
-        <h1>{{ user.username }}</h1>
+        <div class="container row center">
+            <span class="title">{{ user.username }}</span>
+            {% if user.sex == "F" %}
+            <img class="gender-icon" src="{{ asset('/img/icons/gender_female_icon.png')}}" alt="">
+            {% endif %}
+            {% if user.sex == "M" %}
+            <img class="gender-icon" src="{{ asset('/img/icons/gender_male_icon.png')}}" alt="">
+            {% endif %}
+            {% if user.sex == "NB" %}
+            <img class="gender-icon" src="{{ asset('/img/icons/gender_non_binary_icon.png')}}" alt="">
+            {% endif %}
+        </div>
         <div class="row valign-wrapper">
             <div class="col s4 text container-fluid">
                 <div class="col s12">
                     <div class="center">
-                        <span class="number  teal darken-2">{{ user.organizedEvents|length }}</span>
+                        <span class="number teal darken-2">{{ user.organizedEvents|length }}</span>
                     </div>
                 </div>
                 <div> évènement(s) organisé(s)</div>
@@ -33,19 +44,20 @@
         </div>
     </div>
 
-
+    <!-- IF ROLE ADMIN -->
     {% if is_granted ("ROLE_ADMIN") %}
     <div class="info-admin text">
-        <h2>Info admin :</h2>
+        <h2 class="teal darken-2 center">Info admin :</h2>
         <div> id : {{ user.id }}</div>
         <div> rôle : {{ user.roles ? user.roles|json_encode : '' }}</div>
         <div> Date de naissance : {{ user.dateOfBirth }}</div>
     </div>
     {% endif %}
+    <!-- ENDIF ROLE ADMIN -->
+        
     <div class="text description">
-        <h2>Description : </h2>
+        <h2 class="teal darken-2 center">Description : </h2>
         <p>{{ user.description }}</p>
-        <p>Genre : {{ user.sex }}</p>
     </div>
 
     {% if app.user.id == user.id %}
@@ -65,8 +77,15 @@
 
 {% block stylesheets %}
 <style>
+    .title{
+        font-size: 2em;
+    }
     h2 {
         font-size: 1.2em;
+        padding: 10px 20px;
+        margin: 0 15%;
+        border-radius: 10px;
+        color: whitesmoke;
     }
 
     .profile {
@@ -79,6 +98,12 @@
         padding: 1% 0;
         color: whitesmoke;
         font-weight: bold;
+    }
+
+    .gender-icon{
+        max-width: 50px;
+        max-height: 50px;
+        margin-bottom: -10px;
     }
 
     .number {
@@ -101,12 +126,11 @@
     }
 
     .text {
-        font-size: 1.5em;
+        font-size: 1.2em;
         letter-spacing: 1px;
     }
 
-    .description,
-    .info-admin {
+    .description, .info-admin {
         border-radius: 5px;
         padding-left: 2%;
         margin: 2% auto;
