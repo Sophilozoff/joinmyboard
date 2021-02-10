@@ -1,18 +1,18 @@
 {% block stylesheets %}
 <style>
 #logo{
-    width: 10%;
-    height: 10%;
+    width: 8%;
+    height: 8%;
     margin-left : 20%;
 }
 #title{
     margin: auto;
-    font-size: 3.7em;
+    font-size: 3.4em;
     font-family: "Good Morning";
 }
 </style>
 {% endblock %}
-<div class="container-fluid  red darken-3">   
+<div class="container-fluid red darken-3">   
     <!-- LOGO + TITRE DU SITE -->
     <div class="valign-wrapper row hide-on-med-and-down" >
         <img id="logo" class="col s3" src="{{ asset("/img/logoTest.png" )}}"> 
@@ -22,7 +22,7 @@
     <!-- NAVBAR -->
     <div id="navbar">
         <nav>
-            <div class="nav-wrapper">
+            <div class="nav-wrapper red darken-3">
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="hide-on-med-and-down">
                     <!-- Si je suis connecté -->
