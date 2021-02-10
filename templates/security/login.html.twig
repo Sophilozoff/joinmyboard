@@ -19,10 +19,9 @@
 
 {% block body %}
 <div class="container grey lighten-5">
-    <div id="carousel-connection" class="card row valign-wrapper grey lighten-5">
+    <div id="carousel-connection" class="row grey lighten-5">
         <!-- CAROUSEL -->
-        <div class="col s12 m6">
-
+        <div class="col s12 m12 l6">
             <div class="carousel carousel-slider">
                 <div class="carousel-item red lighten-2 white-text" href="#one">
                     <img src="{{ asset("/img/carousel1.jpg" )}}" alt="">
@@ -39,10 +38,8 @@
             </div>
         </div>
         <!-- END CAROUSEL -->
-
         <!-- CONNECTION -->
-        <div class="col s12 m6">
-
+        <div class="col s12 m12 l6">
             <form method="post">
                 {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -55,19 +52,6 @@
                 <input type="password" name="password" id="inputPassword" class="form-control" required>
 
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-                {#
-                Uncomment this section and add a remember_me option below your firewall to activate remember me
-                functionality.
-                See https://symfony.com/doc/current/security/remember_me.html
-
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" name="_remember_me"> Remember me
-                    </label>
-                </div>
-                #}
-
                 <button href="{{ path('app_index') }}" class="btn btn-lg btn-primary" type="submit">
                     Se connecter
                 </button>
@@ -90,19 +74,19 @@
 
     <!-- BANNER -->
     <div id="resumeHome" class="row">
-        <div class="card-panel card-resumeHome teal lighten-5 z-depth-2 col s12 m4 l4 center">
+        <div class="card-panel card-resumeHome teal lighten-5 z-depth-2 col s12 m12 l4 center">
             <i class="large material-icons teal-text">event</i><br>
             <span class="teal-text flow-text card-title">
                 Organise tes soirées jeux !
             </span>
         </div>
-        <div class="card-panel card-resumeHome  teal lighten-5 z-depth-2 col s12 m4 l4 center">
+        <div class="card-panel card-resumeHome  teal lighten-5 z-depth-2 col s12 m12 l4 center">
             <i class="large material-icons teal-text">extension</i><br>
             <span class="teal-text flow-text card-title">
                 Sélectionne tes jeux préférés !
             </span>
         </div>
-        <div class="card-panel card-resumeHome teal lighten-5 z-depth-2 col s12 m4 l4 center">
+        <div class="card-panel card-resumeHome teal lighten-5 z-depth-2 col s12 m12 l4 center">
             <i class="large material-icons teal-text">mood</i><br>
             <span class="teal-text flow-text card-title">
                 Fais-toi plein de nouveaux amis !
@@ -116,17 +100,13 @@
 {% endblock %}
 {% block stylesheets %}
 <style>
-    #formInscription,
     #inscription {
         box-shadow: 0 0 2em grey;
     }
 
     .carousel-item img {
         height: 100%;
-    }
-
-    div.carousel.carousel-slider {
-        margin-bottom: -10px;
+        object-position: -20%;
     }
 
     #formConnexion button {
@@ -154,11 +134,6 @@
         font-size: 1.1em;
     }
 
-    #resumeHome {
-        display: flex;
-        justify-content: space-between;
-    }
-
     .card-resumeHome {
         box-shadow: 0 0 0.5em rgb(109, 108, 108);
         border: 5px solid #009688;
@@ -173,7 +148,6 @@
     }
 
     .card-title{
-        padding-bottom: 20px;
         font-weight: bold;
     }
     @keyframes pulse {
