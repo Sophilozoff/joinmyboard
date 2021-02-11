@@ -4,25 +4,25 @@
 
 {% block stylesheets %}
 <style>
-.container-form{
-    border: 1px solid rgb(6, 166, 194);
-    margin: 5vh auto;
-    border-radius: 5px;
-}
-body{
-    background-color:#4db6ac;
-}
+    .container-form {
+        border: 1px solid rgb(6, 166, 194);
+        margin: 5vh auto;
+        border-radius: 5px;
+    }
+
+    body {
+        background-color: #4db6ac;
+    }
 </style>
 {% endblock %}
 
 {% block body %}
 <div class="container container-form z-depth-4 grey lighten-5">
     <div class="container">
-    <h1>S'inscrire</h1>
+        <h1>S'inscrire</h1>
 
-    {{ include('user/_form.html.twig') }}
+        {{ include('user/_form.html.twig') }}
 
-    <a href="{{ path('user_index') }}">back to list</a>
-</div>
+    </div>
 </div>
 {% endblock %}

@@ -18,22 +18,22 @@
 {% endblock %}
 
 {% block body %}
-<div class="container grey lighten-5">
+<div id="page" class="container grey lighten-5">
     <div id="carousel-connection" class="row grey lighten-5">
         <!-- CAROUSEL -->
         <div class="col s12 m12 l6">
             <div class="carousel carousel-slider">
-                <div class="carousel-item red lighten-2 white-text" href="#one">
-                    <img src="{{ asset("/img/carousel1.jpg" )}}" alt="">
+                <div class="carousel-item white-text">
+                    <img src="{{ asset("/img/carousel1.jpg" )}}" alt="boardgame en flat design">
                 </div>
-                <div class="carousel-item red lighten-2 white-text" href="#two!">
-                    <img src="{{ asset("/img/carousel2.jpg" )}}" alt="">
+                <div class="carousel-item white-text">
+                    <img src="{{ asset("/img/carousel2.jpg" )}}" alt="photo dans un bar à jeux">
                 </div>
-                <div class="carousel-item red lighten-2 white-text" href="#three!">
-                    <img src="{{ asset("/img/carousel3.jpg" )}}" alt="">
+                <div class="carousel-item white-text">
+                    <img src="{{ asset("/img/carousel3.jpg" )}}" alt="amis heureux">
                 </div>
-                <div class="carousel-item red lighten-2 white-text" href="#four!">
-                    <img src="{{ asset("/img/carousel4.jpg" )}}" alt="">
+                <div class="carousel-item white-text">
+                    <img src="{{ asset("/img/carousel4.jpg" )}}" alt="pions colorés">
                 </div>
             </div>
         </div>
@@ -41,18 +41,17 @@
         <!-- CONNECTION -->
         <div class="col s12 m12 l6">
             <form method="post">
+                <h1 class="h3 mb-3">Connexion</h1>
                 {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                <div class="alert alert-danger red lighten-3 white-text text-white">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
-                <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
-                <label for="inputUsername">Indentifiant</label>
+                <label for="inputUsername">Identifiant</label>
                 <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control"
-                    required autofocus>
+                    required>
                 <label for="inputPassword">Mot de passe</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" required>
-
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                <button href="{{ path('app_index') }}" class="btn btn-lg btn-primary" type="submit">
+                <button id="connexion-button" href="{{ path('app_index') }}" class="btn btn-large btn-primary" type="submit">
                     Se connecter
                 </button>
             </form>
@@ -60,14 +59,14 @@
         <!-- END CONNECTION -->
     </div>
 
-    <!-- h2 -->
-    <div id="inscription" class="card center #004d40 teal darken-2">
+    <!-- INSCRIPTION -->
+    <div id="inscription" class="card center teal darken-2 z-depth-4">
         <h3 class="grey-text text-lighten-2">Rejoins des évènements jeux <br>
             <br>
             et rencontre de nouveaux joueurs !
         </h3>
         <a href="{{ path('user_new') }}" id="inscription-button"
-            class="center btn btn-lg #004d40 teal lighten-5 grey-text text-darken-3" type="submit">
+            class="btn btn-large teal lighten-5 grey-text text-darken-3 waves-effect waves-dark">
             INSCRIPTION
         </a>
     </div>
@@ -100,23 +99,22 @@
 {% endblock %}
 {% block stylesheets %}
 <style>
-    #inscription {
-        box-shadow: 0 0 2em grey;
+    #page{
+        padding-bottom: 100px;
     }
 
+    #connexion-button{
+        margin-top: 40px;
+    }
     .carousel-item img {
         height: 100%;
-        object-position: -20%;
     }
 
-    #formConnexion button {
-        margin: 20px;
+    .alert{
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid rgb(212, 27, 27);
     }
-
-    #formConnexion {
-        padding-right: 30px;
-    }
-
     #inscription {
         padding: 20px 0;
         text-shadow: 0 0 0.5em rgb(48, 48, 48);
@@ -138,7 +136,6 @@
         box-shadow: 0 0 0.5em rgb(109, 108, 108);
         border: 5px solid #009688;
         border-radius: 5px;
-        margin-top : -20px;
     }
 
     .card-resumeHome i {
@@ -150,6 +147,7 @@
     .card-title{
         font-weight: bold;
     }
+
     @keyframes pulse {
         0% {
             transform: scale(0.95);

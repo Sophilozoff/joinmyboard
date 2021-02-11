@@ -1,5 +1,8 @@
 {% block stylesheets %}
 <style>
+    #header{
+        margin-bottom: -22px;
+    }
 #logo{
     width: 8%;
     height: 8%;
@@ -12,7 +15,7 @@
 }
 </style>
 {% endblock %}
-<div class="container-fluid red darken-3">   
+<div id="header" class="container-fluid red darken-2">   
     <!-- LOGO + TITRE DU SITE -->
     <div class="valign-wrapper row hide-on-med-and-down" >
         <img id="logo" class="col s3" src="{{ asset("/img/logoTest.png" )}}"> 
@@ -22,7 +25,7 @@
     <!-- NAVBAR -->
     <div id="navbar">
         <nav>
-            <div class="nav-wrapper red darken-3">
+            <div class="nav-wrapper red darken-2">
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="hide-on-med-and-down">
                     <!-- Si je suis connecté -->

@@ -2,7 +2,7 @@
 
 {% block main %}
 
-<div class="container-fluid">
+<div class="container-fluid white section" >
     <h4 class="teal darken-1">Les prochains évènements</h4>
     <div class="row">
         {% for event in eventsNext %}
@@ -11,10 +11,9 @@
     </div>
 </div>
 
-<div class="container-fluid"></div>
+<div class="container-fluid white section">
     <h4 class="teal darken-1">Les anciens évènements</h4>
     <div class="row">
-
         {% for event in eventsPrev %}
         {{ include("event/_event_block.html.twig")}}
         {% endfor %}
@@ -23,7 +22,11 @@
 {% endblock %}
 {% block stylesheets %}
 <style>
-    .alert-success{
+.section{
+    padding: 40px 50px;
+    margin-bottom: 10px;
+    }
+.alert-success{
         background-color: #64ffda;
         border: 2px #059481  solid;
         border-radius: 5px;
