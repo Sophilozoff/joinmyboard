@@ -3,22 +3,106 @@
 {% block title %}{{ event.title}}{% endblock %}
 
 {% block main %}
-<div class="container">
-    <h1>Event</h1>
+<div id="page" class="white">
+    <div class="center header">
+        <h1 class="z-depth-2 title container">{{ event.title }}</h1>
+    </div>
+
+    <div class="container">
+        <div id="information" class="z-depth-2 container-fluid row">
+            <div  class="col s12 m6 l6">
+                <p>Le {{ event.dateEvent|date("d/m/Y")}} à {{ event.timeEvent|date('H:i')}}</p>
+                <p>Lieu : {{ event.location }}</p>
+                <p>Organisé par : {{event.author}}</p> 
+                <p>{{ event.description }}</p> 
+            </div>
+            <div  class="col s12 m6 l6">
+                <img id="image" src="{{ asset('/img/images/'~ event.image )}}" alt="{{ event.title }}">
+            </div>
+        </div>
+    </div>
 
 
-
-    {% if app.user == event.author %}
+    {% if app.user == event.author and event.dateEvent < date()  %}
     <div class="container-fluid row valign-wrapper">
         <div class="col s6">
     <a class="btn lime darken-1" href="{{ path('event_edit', {'id': event.id}) }}">MODIFIER</a>
-</div>
-<div class="col s6">
-    {{ include('event/_delete_form.html.twig') }}
-</div>
-
-</div>
+        </div>
+        <div class="col s6">
+            {{ include('event/_delete_form.html.twig') }}
+        </div>
+    </div>
     {% endif %}
+    <div class="container row">
+        <div id="subscribers" class="col col s6 z-depth-2">
+            <h2 class="title z-depth-2">Liste des participants : </h2>
+            <ul>
+                {% for subscriber in event.subscriber %}
+                <li>
+                    <a class="subscriber-link" href="{{ path('user_show', {'id': subscriber.id})}}">
+                        <div class="subscriber z-depth-2 row valign-wrapper">
+                            <div class="col s2">
+                                <img class="avatar" src="{{ asset('/img/avatars/'~ subscriber.avatar )}}" alt="photo de {{ subscriber.username }}">
+                            </div>
+                            <div class="col s8 center">
+                                <p class="subscriber-username">{{ subscriber.username }}</p>
+                            </div>
+                            <div class="col s2"></div>
+                        </div>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="boardgames" class="col col s6 z-depth-2">
+            <h2 class="title z-depth-2">Liste des jeux : </h2>
+
+        </div>
+
+    </div>
+      
 </div>
 
+{% endblock %}
+{% block stylesheets %}
+<style>
+    #page{
+        padding: 50px 0;
+    }
+    .title{
+        color: white;
+        background-color:#059481;
+        border-radius: 35px;
+        border: whitesmoke 3px solid;
+        padding: 5px 15px;
+        font-size: 2em;
+        margin-bottom: 25px;
+    }
+    #information, #subscribers, #boardgames{
+        padding: 15px;
+        border: 1px solid #059481;
+        border-radius: 35px;
+    }
+    .subscriber{
+        padding: 5px;
+        margin: 1%;
+        background-color: #f4f7f6;
+        border-radius: 5px;
+    }
+    .subscriber-link :hover{
+        font-weight: bold;
+        background-color: #a7a5a5;
+    }
+    .subscriber-username{
+        color: black;
+        font-size: 1.3em;
+    }
+    #image{
+        width: 80%;
+    }
+    .avatar{
+        width: 100%;
+        border-radius: 50%;
+    }
+</style>
 {% endblock %}
