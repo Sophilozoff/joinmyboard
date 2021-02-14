@@ -5,10 +5,11 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
@@ -28,7 +29,7 @@ class UserType extends AbstractType
                 'first_options'  => ['label' => 'Mot de passe (8 caractères minimum)'],
                 'second_options' => ['label' => 'Confirmation du mot de passe'],
             ])
-            ->add('email', null, [
+            ->add('email', EmailType::class, [
                 'label' => false
             ])
             ->add('roles', ChoiceType::class, [
