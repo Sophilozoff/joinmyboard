@@ -25,6 +25,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank
      */
     private $username;
 
@@ -36,6 +37,11 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank
+     * * @Assert\Length(
+     *      min = 8,
+     *      minMessage = "Le mot de passe doit contenir au minimum {{ limit }} caractères",
+     * )
      */
     private $password;
 

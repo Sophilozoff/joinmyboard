@@ -25,7 +25,7 @@ class UserType extends AbstractType
                 'invalid_message' => 'Les mots de passe doivent être identiques',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Mot de passe'],
+                'first_options'  => ['label' => 'Mot de passe (8 caractères minimum)'],
                 'second_options' => ['label' => 'Confirmation du mot de passe'],
             ])
             ->add('email', null, [
