@@ -9,16 +9,17 @@
 <div class="container z-depth-4 profile white">
     <div class="header-profile container-fluid teal lighten-2 center">
         <div class="container row center">
-            <span class="title">{{ user.username }}</span>
-            {% if user.sex == "F" %}
-            <img class="gender-icon" src="{{ asset('/img/icons/gender_female_icon.png')}}" alt="">
-            {% endif %}
-            {% if user.sex == "M" %}
-            <img class="gender-icon" src="{{ asset('/img/icons/gender_male_icon.png')}}" alt="">
-            {% endif %}
-            {% if user.sex == "NB" %}
-            <img class="gender-icon" src="{{ asset('/img/icons/gender_non_binary_icon.png')}}" alt="">
-            {% endif %}
+            <h1>{{ user.username }}
+                {% if user.sex == "F" %}
+                <img class="gender-icon" src="{{ asset('/img/icons/gender_female_icon.png')}}" alt="">
+                {% endif %}
+                {% if user.sex == "M" %}
+                <img class="gender-icon" src="{{ asset('/img/icons/gender_male_icon.png')}}" alt="">
+                {% endif %}
+                {% if user.sex == "NB" %}
+                <img class="gender-icon" src="{{ asset('/img/icons/gender_non_binary_icon.png')}}" alt="">
+                {% endif %}
+            </h1>
         </div>
         <div class="row valign-wrapper">
             <div class="col s4 text container-fluid">
@@ -43,9 +44,9 @@
             </div>
         </div>
     </div>
-        
+
     <div class="text description">
-        <h2 class="teal darken-2 center">Description : </h2>
+        <h2 class="title center z-depth-2">Description : </h2>
         <p>{{ user.description }}</p>
     </div>
 
@@ -66,9 +67,16 @@
 
 {% block stylesheets %}
 <style>
-    .title{
+    .title {
+        color: white;
+        background-color: #059481;
+        border-radius: 35px;
+        border: whitesmoke 3px solid;
+        padding: 5px 15px;
         font-size: 2em;
+        margin-bottom: 25px;
     }
+
     h2 {
         font-size: 1.2em;
         padding: 10px 20px;
@@ -89,7 +97,7 @@
         font-weight: bold;
     }
 
-    .gender-icon{
+    .gender-icon {
         max-width: 50px;
         max-height: 50px;
         margin-bottom: -10px;
@@ -119,7 +127,8 @@
         letter-spacing: 1px;
     }
 
-    .description, .info-admin {
+    .description,
+    .info-admin {
         border-radius: 5px;
         padding-left: 2%;
         margin: 2% auto;
