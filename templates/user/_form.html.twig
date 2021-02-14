@@ -1,15 +1,32 @@
 {{ form_start(form) }}
+<div class="row">
 
-<!-- IDENTIFIANT -->
-<div>
-    {{ form_label(form.username, "Identifiant") }}
-    {{ form_row(form.username) }}
-</div>
+    <div class="col s12 m6">
+        <!-- IDENTIFIANT -->
+        {{ form_label(form.username, "Identifiant") }}
+        {{ form_row(form.username) }}
+        <!-- MOT DE PASSE -->
+        {{ form_row(form.password.first) }}
+        {{ form_row(form.password.second) }}
+    </div>
 
-<!-- MOT DE PASSE -->
-<div>
-    {{ form_label(form.password, "Mot de passe") }}
-    {{ form_row(form.password) }}
+    <div class="col s12 m6">
+        <!-- ADRESSE EMAIL -->
+        <div>
+            {{ form_label(form.email, "Adresse email") }}
+            {{ form_row(form.email) }}
+        </div>
+        <!-- GENRE -->
+        <div>
+            {{ form_label(form.sex, "Genre") }}
+            {{ form_widget(form.sex, { 'attr': {'class': 'browser-default'} }) }}
+        </div>
+        <!-- DATE DE NAISSANCE -->
+        <div>
+            {{ form_label(form.dateOfBirth, "Date de naissance") }}
+            {{ form_row(form.dateOfBirth) }}
+        </div>
+    </div>
 </div>
 
 <!-- ROLE -->
@@ -20,23 +37,9 @@
 </div>
 {% endif %}
 
-<!-- ADRESSE EMAIL -->
-<div>
-    {{ form_label(form.email, "Adresse email") }}
-    {{ form_row(form.email) }}
-</div>
 
-<!-- GENRE -->
-<div>
-    {{ form_label(form.sex, "Genre") }}
-    {{ form_widget(form.sex, { 'attr': {'class': 'browser-default'} }) }}
-</div>
 
-<!-- DATE DE NAISSANCE -->
-<div>
-    {{ form_label(form.dateOfBirth, "Date de naissance") }}
-    {{ form_row(form.dateOfBirth) }}
-</div>
+
 
 <!-- PHOTO DE PROFIL -->
 <div>
@@ -48,5 +51,5 @@
 <div>
     {{ form_row(form.description) }}
 </div>
-    <button class="btn">{{ button_label|default('Valider') }}</button>
+<button class="btn">{{ button_label|default('Valider') }}</button>
 {{ form_end(form) }}
