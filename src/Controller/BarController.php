@@ -18,6 +18,7 @@ class BarController extends AbstractController
 {
     /**
      * @Route("/", name="bar_index", methods={"GET"})
+     * 
      */
     public function index(BarRepository $barRepository): Response
     {
@@ -62,6 +63,7 @@ class BarController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="bar_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Bar $bar): Response
     {
@@ -82,6 +84,7 @@ class BarController extends AbstractController
 
     /**
      * @Route("/{id}", name="bar_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Bar $bar): Response
     {
