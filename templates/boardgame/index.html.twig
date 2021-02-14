@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Boardgame index{% endblock %}
+
+{% block body %}
+    <h1>Boardgame index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>NbPlayersMin</th>
+                <th>NbPlayersMax</th>
+                <th>Description</th>
+                <th>PlayingTime</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for boardgame in boardgames %}
+            <tr>
+                <td>{{ boardgame.id }}</td>
+                <td>{{ boardgame.name }}</td>
+                <td>{{ boardgame.image }}</td>
+                <td>{{ boardgame.nbPlayersMin }}</td>
+                <td>{{ boardgame.nbPlayersMax }}</td>
+                <td>{{ boardgame.description }}</td>
+                <td>{{ boardgame.playingTime }}</td>
+                <td>
+                    <a href="{{ path('boardgame_show', {'id': boardgame.id}) }}">show</a>
+                    <a href="{{ path('boardgame_edit', {'id': boardgame.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('boardgame_new') }}">Create new</a>
+{% endblock %}
