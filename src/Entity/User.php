@@ -82,6 +82,13 @@ class User implements UserInterface
      * * @Assert\Email(
      *     message = "L'adresse email'{{ value }}' n'est pas correcte."
      * )
+     * Assert\NotBlank
+     * @Assert\Length(
+     *      min = 50,
+     *      max = 50,
+     *      minMessage = "La description doit contenir au minimum 50 caractères",
+     *      maxMessage = "La description ne peiut pas contenir plus de 500 caractères"
+     * )
      */
     private $email;
 
