@@ -43,17 +43,6 @@
             </div>
         </div>
     </div>
-
-    <!-- IF ROLE ADMIN -->
-    {% if is_granted ("ROLE_ADMIN") %}
-    <div class="info-admin text">
-        <h2 class="teal darken-2 center">Info admin :</h2>
-        <div> id : {{ user.id }}</div>
-        <div> rôle : {{ user.roles ? user.roles|json_encode : '' }}</div>
-        <div> Date de naissance : {{ user.dateOfBirth }}</div>
-    </div>
-    {% endif %}
-    <!-- ENDIF ROLE ADMIN -->
         
     <div class="text description">
         <h2 class="teal darken-2 center">Description : </h2>
