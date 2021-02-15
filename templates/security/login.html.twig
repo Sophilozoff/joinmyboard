@@ -18,6 +18,12 @@
 {% endblock %}
 
 {% block body %}
+   <!-- LOGO + TITRE DU SITE -->
+   <div class="valign-wrapper row hide-on-med-and-down  red darken-2" >
+    <img id="logo" class="col s3" src="{{ asset("/img/logoTest.png" )}}"> 
+    <a id="title" href="{{ path('app_index') }}" class="col s6 hide-on-med-and-down amber-text text-lighten-3">Join My Board</a>
+</div>
+<!-- LOGO + TITRE END -->
 <div id="page" class="container grey lighten-5">
     <div id="carousel-connection" class="row grey lighten-5">
         <!-- CAROUSEL -->
@@ -99,6 +105,19 @@
 {% endblock %}
 {% block stylesheets %}
 <style>
+    #header{
+        margin-bottom: -22px;
+    }
+#logo{
+    width: 8%;
+    height: 8%;
+    margin-left : 20%;
+}
+#title{
+    margin: auto;
+    font-size: 3.4em;
+    font-family: "Good Morning";
+}
     #page{
         padding-bottom: 100px;
     }
