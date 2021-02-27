@@ -38,8 +38,9 @@
             <h2 class="title z-depth-2">Liste des participants : </h2>
             <ul>
                 {% for subscriber in event.subscriber %}
-                <li>
-                    <a class="subscriber-link" href="{{ path('user_show', {'id': subscriber.id})}}">
+                <li class="valign-wrapper container-fluid row">
+                    <a href="{{ path('friendlist_add', {'id': subscriber.id}) }}" class="col s2"><i class="material-icons">add_circle_outline</i></a>
+                    <a class="subscriber-link col s9" href="{{ path('user_show', {'id': subscriber.id})}}">
                         <div class="subscriber z-depth-2 row valign-wrapper">
                             <div class="col s2">
                                 <img class="avatar" src="{{ asset('/img/avatars/'~ subscriber.avatar )}}" alt="photo de {{ subscriber.username }}">
@@ -47,7 +48,6 @@
                             <div class="col s8 center">
                                 <p class="subscriber-username">{{ subscriber.username }}</p>
                             </div>
-                            <div class="col s2"></div>
                         </div>
                     </a>
                 </li>

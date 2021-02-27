@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block main %}
+
+<div class="container-fluid white section">
+<h1>Ma liste d'amis</h1>
+
+{% for friend in user.friends %}
+Pseudo : {{ friend.username }}
+{% endfor %}
+
+</div>
+{% endblock %}
+{% block stylesheets %}
+<style>
+.section{
+    padding: 40px 50px;
+    margin-bottom: 10px;
+    }
+
+</style>
+{% endblock %}

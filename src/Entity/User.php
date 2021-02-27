@@ -112,12 +112,26 @@ class User implements UserInterface
      */
     private $boardgamesList;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="friendsWithMe")
+     * @ORM\JoinTable(name="friends",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="friend_user_id", referencedColumnName="id")}
+     *      )
+     */
+    private $friends;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="friends")
+     */
+    private $friendsWithMe;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
         $this->organizedEvents = new ArrayCollection();
         $this->friendsWithMe = new ArrayCollection();
-        $this->myFriends = new ArrayCollection();
+        $this->friends = new ArrayCollection();
     }
     public function __toString()
     {
@@ -356,6 +370,57 @@ class User implements UserInterface
         }
 
         $this->boardgamesList = $boardgamesList;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getFriends(): Collection
+    {
+        return $this->friends;
+    }
+
+    public function addFriend(self $friend): self
+    {
+        if (!$this->friends->contains($friend)) {
+            $this->friends[] = $friend;
+        }
+
+        return $this;
+    }
+
+    public function removeFriend(self $friend): self
+    {
+        $this->friends->removeElement($friend);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getFriendsWithMe(): Collection
+    {
+        return $this->friendsWithMe;
+    }
+
+    public function addFriendsWithMe(self $friendsWithMe): self
+    {
+        if (!$this->friendsWithMe->contains($friendsWithMe)) {
+            $this->friendsWithMe[] = $friendsWithMe;
+            $friendsWithMe->addFriend($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFriendsWithMe(self $friendsWithMe): self
+    {
+        if ($this->friendsWithMe->removeElement($friendsWithMe)) {
+            $friendsWithMe->removeFriend($this);
+        }
 
         return $this;
     }

@@ -11,10 +11,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/user")
- * @IsGranted("ROLE_USER")
+ * 
  */
 class UserController extends AbstractController
 {
@@ -54,6 +55,35 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/friendslist", name="friendslist", methods={"GET"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function friendslist(User $user): Response
+    {
+        $friends = $user->getFriends();
+        return $this->render('user/friendslist.html.twig', [
+            'friends' => $friends,
+            'user' =>$user
+        ]);
+    }
+
+    
+    /**
+     * @Route("/friendslist-add/{id}", name="friendlist_add", methods={"GET"})
+     * @ParamConverter("id", options={"id": "id"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function friendslist_add(User $user): Response
+    {
+        $currentUser = $this->getUser();
+        $currentUser->addFriend($user);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('user_index');
+
+    }
+
+    /**
      * @Route("/", name="user_index", methods={"GET"})
      */
     public function index(UserRepository $userRepository): Response
@@ -64,8 +94,8 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_show", methods={"GET"})
-     * 
+     * @Route("/show/{id}", name="user_show", methods={"GET"})
+     * @ParamConverter("id", options={"id": "id"})
      */
     public function show(User $user): Response
     {
@@ -96,7 +126,8 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_delete", methods={"DELETE"})
+     * @Route("/delete/{id}", name="user_delete", methods={"DELETE"})
+     * @ParamConverter("id", options={"id": "id"})
      * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, User $user): Response
@@ -109,5 +140,5 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('user_index');
     }
-
+    
 }
