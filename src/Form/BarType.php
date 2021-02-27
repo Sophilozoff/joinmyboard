@@ -13,7 +13,6 @@ class BarType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('address')
         ;
     }
 

@@ -11,9 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/bar")
- */
 class BarController extends AbstractController
 {
     /**
@@ -27,29 +24,6 @@ class BarController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="bar_new", methods={"GET","POST"})
-     * @IsGranted("ROLE_ADMIN")
-     */
-    public function new(Request $request): Response
-    {
-        $bar = new Bar();
-        $form = $this->createForm(BarType::class, $bar);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($bar);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('bar_index');
-        }
-
-        return $this->render('bar/new.html.twig', [
-            'bar' => $bar,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="bar_show", methods={"GET"})
@@ -61,39 +35,4 @@ class BarController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="bar_edit", methods={"GET","POST"})
-     * @IsGranted("ROLE_ADMIN")
-     */
-    public function edit(Request $request, Bar $bar): Response
-    {
-        $form = $this->createForm(BarType::class, $bar);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('bar_index');
-        }
-
-        return $this->render('bar/edit.html.twig', [
-            'bar' => $bar,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="bar_delete", methods={"DELETE"})
-     * @IsGranted("ROLE_ADMIN")
-     */
-    public function delete(Request $request, Bar $bar): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$bar->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($bar);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('bar_index');
-    }
 }

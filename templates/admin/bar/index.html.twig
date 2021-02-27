@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bar admin{% endblock %}
+
+{% block body %}
+<div class="container-fluid dashboard-page white grey lighten-4">
+    <div class="container-fluid row">
+        {{ include('admin/menu_inc.html.twig') }}
+        <div class="col s8 content">
+            <a class="btn add" href="{{ path('bar_new') }}">Ajouter un bar</a>
+            <div class="white">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Enseigne</th>
+                            <th>Adresse</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for bar in bars %}
+                        <tr>
+                            <td>{{ bar.id }}</td>
+                            <td>{{ bar.name }}</td>
+                            <td>{{ bar.address.street }}, {{ bar.address.zipCode }} {{ bar.address.city }}</td>
+                            <td>
+                                <a class="btn blue darken-3" href="{{ path('bar_show', {'id': bar.id}) }}">VOIR</a>
+                                <a class="btn lime darken-2" href="{{ path('bar_edit', {'id': bar.id}) }}">ÉDITER</a>
+                                <a class="btn red darken-2"
+                                    href="{{ path('bar_delete', {'id': bar.id}) }}">SUPPRIMER</a>
+
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="3">no records found</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endblock %}
+
+        {% block stylesheets %}
+        <style>
+            .content {
+                margin-top: 10px;
+            }
+
+            .add {
+                font-size: 1.2em;
+                margin-bottom: 50px;
+            }
+
+            .statistic-card {
+                padding: 35px;
+            }
+
+            .statistic-card span {
+                font-size: 4em;
+            }
+        </style>
+        {% endblock %}

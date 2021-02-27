@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+
+
+<div class="container-fluid dashboard-page white grey lighten-4">
+    <div class="container-fluid row">
+        {{ include('admin/menu_inc.html.twig') }}
+
+        <div class="col s8">
+            <div class="container-fluid row statistics white">
+                <div class="statistic-card col s6 teal lighten-4"><span>{{ countAllUsers['value'] }}</span>  Utilisateurs</div>
+                <div class="statistic-card col s6 deep-orange lighten-4"><span>{{ countAllEvents['value'] }}</span>  Évènements</div>
+            </div>
+    
+
+        </div>
+    </div>
+    
+</div>
+{% endblock %}
+{% block stylesheets %}
+<style>
+    .dashboard-page{
+        padding: 10px;
+    }
+
+    a:hover{
+        font-weight: bold;
+    }
+    .statistics{
+        padding: 15px;
+        font-size: 1.2em;
+        margin-bottom: 50px;
+    }
+    .statistic-card{
+        padding: 35px;
+    }
+    .statistic-card span{
+        font-size: 4em;
+    }
+</style>
+{% endblock %}
+
