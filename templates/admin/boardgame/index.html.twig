@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Boardgame admin{% endblock %}
+
+{% block body %}
+<div class="container-fluid dashboard-page white grey lighten-4">
+    <div class="container-fluid row">
+        {{ include('admin/menu_inc.html.twig') }}
+        <div class="col s9 content">
+            <a  class="btn add" href="{{ path('boardgame_new') }}">AJOUTER UN JEU</a>
+            <div class="white">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="colonne">Id</th>
+                <th class="colonne">Titre</th>
+                <th class="colonne">Image</th>
+                <th class="colonne">Joueurs max</th>
+                <th class="colonne">Joueurs min</th>
+                <th class="colonne">Description</th>
+                <th class="colonne">Durée moyenne</th>
+                <th class="colonne">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for boardgame in boardgames %}
+            <tr>
+                <td class="colonne">{{ boardgame.id }}</td>
+                <td class="colonne">{{ boardgame.name }}</td>
+                <td class="colonne">
+                    <img class="image" src="{{ boardgame.image }}" alt="boardgame.name">
+                </td>
+                <td class="colonne">{{ boardgame.nbPlayersMin }}</td>
+                <td class="colonne">{{ boardgame.nbPlayersMax }}</td>
+                <td class="colonne">{{ boardgame.description }}</td>
+                <td class="colonne">{{ boardgame.playingTime }}</td>
+                <td class="colonne">
+                    <a class="btn blue darken-3" href="{{ path('boardgame_show', {'id': boardgame.id}) }}">VOIR</a>
+                    <a class="btn lime darken-2" href="{{ path('boardgame_edit', {'id': boardgame.id}) }}">ÉDITER</a>
+                    {{ include('admin/boardgame/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+{% endblock %}
+{% block stylesheets %}
+        <style>
+            .content {
+                margin-top: 10px;
+            }
+            .colonne{
+                max-width: 200px;
+            }
+            .image{
+                width: 100px;
+                height: 100px;
+            }
+            .add {
+                font-size: 1.2em;
+                margin-bottom: 50px;
+            }
+        </style>
+        {% endblock %}

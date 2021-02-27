@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Bar;
+use App\Entity\Boardgame;
 use App\Form\BarType;
+use App\Form\BoardgameType;
 use App\Repository\BarRepository;
+use App\Repository\BoardgameRepository;
 use App\Repository\EventRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +23,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
      */
 class AdminController extends AbstractController
 {
-
     /**
      * @Route("/accueil", name="admin_index")
      */
@@ -32,10 +34,9 @@ class AdminController extends AbstractController
             'countAllEvents' => $eventRepository->countById()
         ]);
     }
-    
 
     /**
-     * @Route("/bar", name="admin_bar_index", methods={"GET"})
+     * @Route("/bars", name="admin_bar_index", methods={"GET"})
      * 
      */
     public function bars(BarRepository $barRepository): Response
@@ -46,9 +47,8 @@ class AdminController extends AbstractController
     }
     
     /**
-     * @Route("/new", name="bar_new", methods={"GET","POST"})
+     * @Route("/nouveau-bar", name="bar_new", methods={"GET","POST"})
      */
-
     public function new_bar(Request $request): Response
     {
         $bar = new Bar();
@@ -70,9 +70,9 @@ class AdminController extends AbstractController
     }
     
     /**
-     * @Route("/{id}/edit", name="bar_edit", methods={"GET","POST"})
+     * @Route("/{id}/bar-edit", name="bar_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Bar $bar): Response
+    public function bar_edit(Request $request, Bar $bar): Response
     {
         $form = $this->createForm(BarType::class, $bar);
         $form->handleRequest($request);
@@ -90,9 +90,9 @@ class AdminController extends AbstractController
     }
     
     /**
-     * @Route("/{id}", name="bar_delete", methods={"DELETE"})
+     * @Route("/bars/{id}", name="bar_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Bar $bar): Response
+    public function bar_delete(Request $request, Bar $bar): Response
     {
         if ($this->isCsrfTokenValid('delete'.$bar->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -102,4 +102,69 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('admin_bar_index');
     }
+        /**
+     * @Route("/jeux", name="admin_boardgame_index", methods={"GET"})
+     */
+    public function boardgames(BoardgameRepository $boardgameRepository): Response
+    {
+        return $this->render('admin/boardgame/index.html.twig', [
+            'boardgames' => $boardgameRepository->findAll(),
+        ]);
+    }
+    /**
+     * @Route("/nouveau-jeu", name="boardgame_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
+    {
+        $boardgame = new Boardgame();
+        $form = $this->createForm(BoardgameType::class, $boardgame);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($boardgame);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_boardgame_index');
+        }
+
+        return $this->render('admin/boardgame/new.html.twig', [
+            'boardgame' => $boardgame,
+            'form' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("/{id}/boardgame-edit", name="boardgame_edit", methods={"GET","POST"})
+     */
+    public function boardgame_edit(Request $request, Boardgame $boardgame): Response
+    {
+        $form = $this->createForm(BoardgameType::class, $boardgame);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('admin_boardgame_index');
+        }
+
+        return $this->render('admin/boardgame/edit.html.twig', [
+            'boardgame' => $boardgame,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/boardgames/{id}", name="boardgame_delete", methods={"DELETE"})
+     */
+    public function boardgame_delete(Request $request, Boardgame $boardgame): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$boardgame->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($boardgame);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_boardgame_index');
+    }
+
 }

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Boardgame{% endblock %}
+
+{% block body %}
+<div class="container-fluid dashboard-page white grey lighten-4">
+    <div class="container-fluid row">
+        {{ include('admin/menu_inc.html.twig') }}
+        <div class="col s9 content">
+            <a class="btn grey darken-3 goback" href="{{ path('admin_boardgame_index') }}">retour</a>
+
+            <h1>Modifier {{boardgame.name}}</h1>
+
+            {{ include('admin/boardgame/_form.html.twig', {'button_label': 'MODIFIER'}) }}
+        </div>
+    </div>
+    {% endblock %}
+    {% block stylesheets %}
+    <style>
+        .goback {
+            margin-top: 50px;
+        }
+    </style>
+{% endblock %}

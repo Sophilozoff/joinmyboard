@@ -27,8 +27,7 @@
                             <td>
                                 <a class="btn blue darken-3" href="{{ path('bar_show', {'id': bar.id}) }}">VOIR</a>
                                 <a class="btn lime darken-2" href="{{ path('bar_edit', {'id': bar.id}) }}">ÉDITER</a>
-                                <a class="btn red darken-2"
-                                    href="{{ path('bar_delete', {'id': bar.id}) }}">SUPPRIMER</a>
+                                {{ include('admin/bar/_delete_form.html.twig') }}
 
                             </td>
                         </tr>
@@ -42,7 +41,6 @@
             </div>
         </div>
         {% endblock %}
-
         {% block stylesheets %}
         <style>
             .content {

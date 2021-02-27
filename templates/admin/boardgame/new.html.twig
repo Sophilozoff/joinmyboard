@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Boardgame{% endblock %}
+
+{% block body %}
+<div class="container-fluid dashboard-page white grey lighten-4">
+    <div class="container-fluid row">
+        {{ include('admin/menu_inc.html.twig') }}
+        <div class="col s8 content white">
+            <a class="btn grey darken-3 goback" href="{{ path('admin_boardgame_index') }}">retour</a>
+            <h1>Formulaire d'ajout de jeu</h1>
+
+            {{ include('admin/boardgame/_form.html.twig') }}
+
+
+        </div>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    <style>
+        .goback {
+            margin-top: 50px;
+        }
+    </style>
+{% endblock %}
+{% block jquery %}
+<script>
+    //function for datepicker and timepicker in materialize
+    $(document).ready(function () {
+        //function for activate select input in materialize
+        $('select').formSelect();
+    });
+</script>
+{% endblock %}
+
+

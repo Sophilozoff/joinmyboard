@@ -7,7 +7,7 @@
     <div class="container-fluid row">
         {{ include('admin/menu_inc.html.twig') }}
         <div class="col s8 content white">
-            <a class="btn grey darken-3 goback" href="{{ path('bar_index') }}">retour</a>
+            <a class="btn grey darken-3 goback" href="{{ path('admin_bar_index') }}">retour</a>
             <h1>Formulaire d'ajout de bar</h1>
 
             {{ include('admin/bar/_form.html.twig') }}
@@ -15,11 +15,11 @@
 
         </div>
     </div>
-    {% endblock %}
-    {% block stylesheets %}
+{% endblock %}
+{% block stylesheets %}
     <style>
         .goback {
             margin-top: 50px;
         }
     </style>
-    {% endblock %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{{ form_start(form) }}
+    
+<!-- TITRE -->
+<div>
+    {{ form_label(form.name, "Titre") }}
+    {{ form_row(form.name) }}
+</div>
+
+<!-- IMAGE -->
+<div>
+    {{ form_label(form.image, "image") }}
+    {{ form_row(form.image) }}
+</div>
+<div class="container-fluid row">
+<!-- JOUEURS MIN -->
+<div class="col s6">
+    {{ form_label(form.nbPlayersMin, "Joueurs min") }}
+    {{ form_row(form.nbPlayersMin) }}
+</div>
+
+<!-- JOUEURS MAX -->
+<div class="col s6">
+    {{ form_label(form.nbPlayersMax, "Joueurs max") }}
+    {{ form_row(form.nbPlayersMax) }}
+</div>
+</div>
+<!-- DESCRIPTION -->
+<div>
+    {{ form_label(form.description, "Description") }}
+    {{ form_row(form.description) }}
+</div>
+
+<!-- DUREE -->
+<div>
+    {{ form_label(form.playingTime, "Durée") }}
+    {{ form_row(form.playingTime) }}
+</div>
+    <button class="btn">{{ button_label|default('AJOUTER LE JEU') }}</button>
+{{ form_end(form) }}
