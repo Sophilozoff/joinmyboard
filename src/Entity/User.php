@@ -107,15 +107,23 @@ class User implements UserInterface
      */
     private $sex;
 
+    /**
+     * @ORM\OneToOne(targetEntity=BoardgamesList::class, mappedBy="author", cascade={"persist", "remove"})
+     */
+    private $boardgamesList;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
         $this->organizedEvents = new ArrayCollection();
+        $this->friendsWithMe = new ArrayCollection();
+        $this->myFriends = new ArrayCollection();
     }
     public function __toString()
     {
         return $this->username;
     }
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -326,6 +334,28 @@ class User implements UserInterface
     public function setSex(?string $sex): self
     {
         $this->sex = $sex;
+
+        return $this;
+    }
+
+    public function getBoardgamesList(): ?BoardgamesList
+    {
+        return $this->boardgamesList;
+    }
+
+    public function setBoardgamesList(?BoardgamesList $boardgamesList): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($boardgamesList === null && $this->boardgamesList !== null) {
+            $this->boardgamesList->setAuthor(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($boardgamesList !== null && $boardgamesList->getAuthor() !== $this) {
+            $boardgamesList->setAuthor($this);
+        }
+
+        $this->boardgamesList = $boardgamesList;
 
         return $this;
     }

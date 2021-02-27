@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
      * @Route("/admin")
@@ -36,7 +36,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/bars", name="admin_bar_index", methods={"GET"})
+     * @Route("/bar/index", name="admin_bar_index", methods={"GET"})
      * 
      */
     public function bars(BarRepository $barRepository): Response
@@ -47,7 +47,7 @@ class AdminController extends AbstractController
     }
     
     /**
-     * @Route("/nouveau-bar", name="bar_new", methods={"GET","POST"})
+     * @Route("/bar/nouveau-bar", name="bar_new", methods={"GET","POST"})
      */
     public function new_bar(Request $request): Response
     {
@@ -68,9 +68,21 @@ class AdminController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/bar/{id}", name="bar_show", methods={"GET"})
+     * @ParamConverter("bar", options={"id" = "bar_id"})
+     */
+    public function show(Bar $bar): Response
+    {
+        return $this->render('admin/bar/show.html.twig', [
+            'bar' => $bar,
+        ]);
+    }
     
     /**
-     * @Route("/{id}/bar-edit", name="bar_edit", methods={"GET","POST"})
+     * @Route("/bar/{id}/bar-edit", name="bar_edit", methods={"GET","POST"})
+     * @ParamConverter("bar", options={"id" = "bar_id"})
      */
     public function bar_edit(Request $request, Bar $bar): Response
     {
@@ -91,6 +103,7 @@ class AdminController extends AbstractController
     
     /**
      * @Route("/bars/{id}", name="bar_delete", methods={"DELETE"})
+     * @ParamConverter("bar", options={"id" = "bar_id"})
      */
     public function bar_delete(Request $request, Bar $bar): Response
     {
@@ -102,7 +115,7 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('admin_bar_index');
     }
-        /**
+    /**
      * @Route("/jeux", name="admin_boardgame_index", methods={"GET"})
      */
     public function boardgames(BoardgameRepository $boardgameRepository): Response
@@ -134,7 +147,8 @@ class AdminController extends AbstractController
         ]);
     }
     /**
-     * @Route("/{id}/boardgame-edit", name="boardgame_edit", methods={"GET","POST"})
+     * @Route("/boardgames/{id}/boardgame-edit", name="boardgame_edit", methods={"GET","POST"})
+     * @ParamConverter("boardgame", options={"id" = "boardgame_id"})
      */
     public function boardgame_edit(Request $request, Boardgame $boardgame): Response
     {
@@ -154,7 +168,8 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/boardgames/{id}", name="boardgame_delete", methods={"DELETE"})
+     * @Route("/boardgames/{id}", name="admin_boardgame_delete", methods={"DELETE"})
+     * @ParamConverter("boardgame", options={"id" = "boardgame_id"})
      */
     public function boardgame_delete(Request $request, Boardgame $boardgame): Response
     {

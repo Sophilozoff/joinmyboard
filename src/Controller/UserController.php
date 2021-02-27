@@ -14,7 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/user")
- * 
+ * @IsGranted("ROLE_USER")
  */
 class UserController extends AbstractController
 {
@@ -31,14 +31,14 @@ class UserController extends AbstractController
      */
     public function new(Request $request): Response
     {
-    
+
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword( 
-                $this->encoder->encodePassword( $user, $user->getPassword() )
+            $user->setPassword(
+                $this->encoder->encodePassword($user, $user->getPassword())
             );
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -52,7 +52,7 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    
+
     /**
      * @Route("/", name="user_index", methods={"GET"})
      */
@@ -109,4 +109,5 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('user_index');
     }
+
 }

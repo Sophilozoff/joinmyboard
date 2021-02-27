@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BoardgameRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +48,16 @@ class Boardgame
      * @ORM\Column(type="integer", nullable=true)
      */
     private $playingTime;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=BoardgamesList::class, mappedBy="boardgames")
+     */
+    private $boardgamesLists;
+
+    public function __construct()
+    {
+        $this->boardgamesLists = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +132,33 @@ class Boardgame
     public function setPlayingTime(?int $playingTime): self
     {
         $this->playingTime = $playingTime;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|BoardgamesList[]
+     */
+    public function getBoardgamesLists(): Collection
+    {
+        return $this->boardgamesLists;
+    }
+
+    public function addBoardgamesList(BoardgamesList $boardgamesList): self
+    {
+        if (!$this->boardgamesLists->contains($boardgamesList)) {
+            $this->boardgamesLists[] = $boardgamesList;
+            $boardgamesList->addBoardgame($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBoardgamesList(BoardgamesList $boardgamesList): self
+    {
+        if ($this->boardgamesLists->removeElement($boardgamesList)) {
+            $boardgamesList->removeBoardgame($this);
+        }
 
         return $this;
     }
