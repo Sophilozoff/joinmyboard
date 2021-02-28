@@ -70,11 +70,7 @@ class EventType extends AbstractType
                 'choices' =>[$this->barRepository->findAll()],
                 "multiple"=>false,
                 ])
-            ->add('favoriteGames', EntityType::class, [
-                'class' => User::class,
-                'label' =>false,
-                'choices' =>[$this->user->getFavoriteGames()]
-            ])
+        
         ;
     }
 

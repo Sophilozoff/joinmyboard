@@ -61,6 +61,7 @@ class Boardgame
         $this->events = new ArrayCollection();
     }
 
+
     public function getId(): ?int
     {
         return $this->id;

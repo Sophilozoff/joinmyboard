@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Boardgame;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Repository\BoardgameRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -67,6 +69,20 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/{id}/boardgameslist", name="boardgameslist", methods={"GET"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function boardgameslist(User $user, BoardgameRepository $boardgameRepository): Response
+    {
+        $favoriteGames = $user->getFavoriteGames();
+        return $this->render('boardgame/boardgameslist.html.twig', [
+            'friends' => $favoriteGames,
+            'user' =>$user,
+            'boardgames' => $boardgameRepository->findAll(),
+        ]);
+    }
+
     
     /**
      * @Route("/friendslist-add/{id}", name="friendlist_add", methods={"GET"})
@@ -83,15 +99,20 @@ class UserController extends AbstractController
 
     }
 
-    /**
-     * @Route("/", name="user_index", methods={"GET"})
+     /**
+     * @Route("/boardgames-add/{id}", name="boardgameslist_add", methods={"GET"})
+     * @ParamConverter("id", options={"id": "id"})
+     * @IsGranted("ROLE_USER")
      */
-    public function index(UserRepository $userRepository): Response
+    public function boardgameslist_add(Boardgame $boardgame): Response
     {
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
+        $currentUser = $this->getUser();
+        $currentUser->addFavoriteGame($boardgame);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('app_index');
+
     }
+
 
     /**
      * @Route("/show/{id}", name="user_show", methods={"GET"})
