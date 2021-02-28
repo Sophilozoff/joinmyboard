@@ -17,15 +17,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  */
 class EventController extends AbstractController
 {
-    /**
-     * @Route("/", name="event_index", methods={"GET"})
-     */
-    public function index(EventRepository $eventRepository): Response
-    {
-        return $this->render('event/index.html.twig', [
-            'events' => $eventRepository->findAll(),
-        ]);
-    }
 
     /**
      * @Route("/new", name="event_new", methods={"GET","POST"})
@@ -43,7 +34,7 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
 
-            return $this->redirectToRoute('event_index');
+            return $this->redirectToRoute('app_index');
         }
 
         return $this->render('event/new.html.twig', [

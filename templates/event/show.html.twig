@@ -34,18 +34,18 @@
     </div>
     {% endif %}
     <div class="container row">
-        <div id="subscribers" class="col col s6 z-depth-2">
-            <h2 class="title z-depth-2">Liste des participants : </h2>
+        <div id="subscribers" class="col s12 m6 z-depth-2">
+            <h2 class="title z-depth-2 left-align">Liste des participants : </h2>
             <ul>
                 {% for subscriber in event.subscriber %}
                 <li class="valign-wrapper container-fluid row">
-                    <a href="{{ path('friendlist_add', {'id': subscriber.id}) }}" class="col s2"><i class="material-icons">add_circle_outline</i></a>
+                    <a href="{{ path('friendlist_add', {'id': subscriber.id}) }}" class="addcircle col s1"><i class="material-icons">add_circle_outline</i></a>
                     <a class="subscriber-link col s9" href="{{ path('user_show', {'id': subscriber.id})}}">
                         <div class="subscriber z-depth-2 row valign-wrapper">
                             <div class="col s2">
                                 <img class="avatar" src="{{ asset('/img/avatars/'~ subscriber.avatar )}}" alt="photo de {{ subscriber.username }}">
                             </div>
-                            <div class="col s8 center">
+                            <div class="col s8">
                                 <p class="subscriber-username">{{ subscriber.username }}</p>
                             </div>
                         </div>
@@ -54,9 +54,23 @@
                 {% endfor %}
             </ul>
         </div>
-        <div id="boardgames" class="col col s6 z-depth-2">
+        <div id="boardgames" class="col s12 m6 z-depth-2">
             <h2 class="title z-depth-2">Liste des jeux : </h2>
-
+            <ul>
+                {% for pickedGame in event.pickedGames %}
+                <li class="valign-wrapper container-fluid row">
+                    <a href="{{ path('boardgameslist_add', {'id': pickedGame.id}) }}" class="addcircle col s1"><i class="material-icons">add_circle_outline</i></a>
+                        <div class="picked-game col s9 z-depth-2 row valign-wrapper">
+                            <div class="col s2">
+                                <img class="avatar" src="{{ pickedGame.image }}">
+                            </div>
+                            <div class="col s8">
+                                <p class="subscriber-username">{{ pickedGame.name }}</p>
+                            </div>
+                        </div>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
 
     </div>
@@ -78,12 +92,16 @@
         font-size: 2em;
         margin-bottom: 25px;
     }
+    .addcircle, .picked-game, .subscriber-link{
+        margin-left: 10px !important;
+        
+    }
     #information, #subscribers, #boardgames{
         padding: 15px;
         border: 1px solid #059481;
         border-radius: 35px;
     }
-    .subscriber{
+    .subscriber, .picked-game{
         padding: 5px;
         margin: 1%;
         background-color: #f4f7f6;

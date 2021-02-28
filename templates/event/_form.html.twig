@@ -11,7 +11,6 @@
     {{ form_label(form.dateEvent, "Date") }}
     {{ form_row(form.dateEvent) }}
 </div>
-
 <!-- HEURE -->
 <div>
     {{ form_label(form.timeEvent, "Heure") }}
@@ -42,5 +41,11 @@
     {{ form_row(form.description) }}
 </div>
 
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<!-- JEUX -->
+<div>
+    {{ form_label(form.pickedGames, "Propose des jeux") }}
+    {{ form_row(form.pickedGames) }}
+</div>
+
+    <button class="btn">{{ button_label|default('CRÉER CET ÉVÈNEMENT') }}</button>
 {{ form_end(form) }}
