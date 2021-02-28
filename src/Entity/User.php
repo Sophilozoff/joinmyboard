@@ -108,11 +108,6 @@ class User implements UserInterface
     private $sex;
 
     /**
-     * @ORM\OneToOne(targetEntity=BoardgamesList::class, mappedBy="author", cascade={"persist", "remove"})
-     */
-    private $boardgamesList;
-
-    /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="friendsWithMe")
      * @ORM\JoinTable(name="friends",
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
@@ -352,27 +347,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getBoardgamesList(): ?BoardgamesList
-    {
-        return $this->boardgamesList;
-    }
-
-    public function setBoardgamesList(?BoardgamesList $boardgamesList): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($boardgamesList === null && $this->boardgamesList !== null) {
-            $this->boardgamesList->setAuthor(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($boardgamesList !== null && $boardgamesList->getAuthor() !== $this) {
-            $boardgamesList->setAuthor($this);
-        }
-
-        $this->boardgamesList = $boardgamesList;
-
-        return $this;
-    }
 
     /**
      * @return Collection|self[]
