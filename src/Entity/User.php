@@ -121,12 +121,18 @@ class User implements UserInterface
      */
     private $friendsWithMe;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Boardgame::class, inversedBy="users")
+     */
+    private $favoriteGames;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
         $this->organizedEvents = new ArrayCollection();
         $this->friendsWithMe = new ArrayCollection();
         $this->friends = new ArrayCollection();
+        $this->favoriteGames = new ArrayCollection();
     }
     public function __toString()
     {
@@ -268,6 +274,19 @@ class User implements UserInterface
         return $this;
     }
 
+
+    public function getSex(): ?string
+    {
+        return $this->sex;
+    }
+
+    public function setSex(?string $sex): self
+    {
+        $this->sex = $sex;
+
+        return $this;
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;
@@ -335,19 +354,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getSex(): ?string
-    {
-        return $this->sex;
-    }
-
-    public function setSex(?string $sex): self
-    {
-        $this->sex = $sex;
-
-        return $this;
-    }
-
-
     /**
      * @return Collection|self[]
      */
@@ -399,5 +405,28 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Collection|Boardgame[]
+     */
+    public function getFavoriteGames(): Collection
+    {
+        return $this->favoriteGames;
+    }
+
+    public function addFavoriteGame(Boardgame $favoriteGame): self
+    {
+        if (!$this->favoriteGames->contains($favoriteGame)) {
+            $this->favoriteGames[] = $favoriteGame;
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteGame(Boardgame $favoriteGame): self
+    {
+        $this->favoriteGames->removeElement($favoriteGame);
+
+        return $this;
+    }
 
 }

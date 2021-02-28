@@ -16,16 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  */
 class BoardgameController extends AbstractController
 {
-    /**
-     * @Route("/", name="boardgame_index", methods={"GET"})
-     */
-    public function index(BoardgameRepository $boardgameRepository): Response
-    {
-        return $this->render('boardgame/index.html.twig', [
-            'boardgames' => $boardgameRepository->findAll(),
-        ]);
-    }
-
+   
     /**
      * @Route("/{id}", name="boardgame_show", methods={"GET"})
      * @IsGranted("ROLE_ADMIN")

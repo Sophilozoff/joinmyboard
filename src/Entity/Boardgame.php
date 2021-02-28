@@ -50,14 +50,15 @@ class Boardgame
     private $playingTime;
 
     /**
-     * @ORM\ManyToMany(targetEntity=BoardgamesList::class, mappedBy="boardgames")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="favoriteGames")
      */
-    private $boardgamesLists;
+    private $users;
 
     public function __construct()
     {
-        $this->boardgamesLists = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -137,29 +138,31 @@ class Boardgame
     }
 
     /**
-     * @return Collection|BoardgamesList[]
+     * @return Collection|User[]
      */
-    public function getBoardgamesLists(): Collection
+    public function getUsers(): Collection
     {
-        return $this->boardgamesLists;
+        return $this->users;
     }
 
-    public function addBoardgamesList(BoardgamesList $boardgamesList): self
+    public function addUser(User $user): self
     {
-        if (!$this->boardgamesLists->contains($boardgamesList)) {
-            $this->boardgamesLists[] = $boardgamesList;
-            $boardgamesList->addBoardgame($this);
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addFavoriteGame($this);
         }
 
         return $this;
     }
 
-    public function removeBoardgamesList(BoardgamesList $boardgamesList): self
+    public function removeUser(User $user): self
     {
-        if ($this->boardgamesLists->removeElement($boardgamesList)) {
-            $boardgamesList->removeBoardgame($this);
+        if ($this->users->removeElement($user)) {
+            $user->removeFavoriteGame($this);
         }
 
         return $this;
     }
+
+
 }

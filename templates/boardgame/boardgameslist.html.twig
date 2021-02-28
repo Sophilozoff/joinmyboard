@@ -1,0 +1,82 @@
+{% extends 'layout.html.twig' %}
+
+{% block main %}
+
+<div class="container-fluid white section">
+    <h1>Ma ludothèque</h1>
+
+    <!-- Modal Trigger -->
+    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">AJOUTER DES JEUX</a>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content teal lighten-4">
+            <h4>Choisis des jeux à ajouter à ta ludothèque</h4>
+            {% for boardgame in boardgames %}
+            <div class="container row valign-wrapper white game-card">
+                <div class="col 3">
+                    <img class="image" src="{{ boardgame.image }}" alt="{{ boardgame.name}}">
+                </div>
+                <div class="col s3">
+                    <p class="name">{{ boardgame.name}}</p>
+                    <div class="valign-wrapper">
+                        <i class="material-icons teal-text text-darken-3">group</i>
+                        {{ boardgame.nbPlayersMin }} à {{ boardgame.nbPlayersMax }} joueurs
+                    </div>
+                    <p>{{ boardgame.playingTime }} minutes</p>
+
+                </div>
+                <div class="col s3 valign-wrapper">
+                </div>
+                {% if boardgame in user.favoriteGames %}
+                <i class="material-icons  lime-text text-darken-3">star</i>
+                {% else %}
+                <a href="{{ path('boardgameslist_add', {'id': boardgame.id}) }}" class="center">
+
+                    <i class="material-icons teal-text text-darken-3">add_circle</i>
+                    <p>Ajouter</p>
+                </a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">FERMER</a>
+        </div>
+    </div>
+    <div>
+        {% for favoriteGame in user.favoriteGames %}
+        {{ favoriteGame.name }}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% block jquery %}
+<script>
+    $(document).ready(function () {
+        $('.modal').modal();
+    });
+</script>
+{% endblock %}
+{% block stylesheets %}
+<style>
+    .section {
+        padding: 40px 80px;
+        margin-bottom: 10px;
+    }
+
+    .game-card {
+        padding: 0 40px;
+        border-radius: 10px;
+    }
+
+    .image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .name {
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
