@@ -4,7 +4,9 @@ namespace App\Form;
 
 use App\Entity\Event;
 use App\Entity\Bar;
+use App\Entity\User;
 use App\Repository\BarRepository;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,9 +21,12 @@ class EventType extends AbstractType
 
     private $barRepository;
 
-    public function __construct(BarRepository $barRepository)
+    private $security;
+    public function __construct(BarRepository $barRepository, Security $security)
     {
         $this->barRepository = $barRepository;
+        $this->security = $security;
+        $user = $this->security->getUser();
     }
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -65,6 +70,11 @@ class EventType extends AbstractType
                 'choices' =>[$this->barRepository->findAll()],
                 "multiple"=>false,
                 ])
+            ->add('favoriteGames', EntityType::class, [
+                'class' => User::class,
+                'label' =>false,
+                'choices' =>[$this->user->getFavoriteGames()]
+            ])
         ;
     }
 

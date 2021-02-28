@@ -30,16 +30,22 @@
     {{ form_row(form.imageFile) }}
 </div>
 
+<!-- LOCATION -->
+<div>
+    {{ form_label(form.location, "Lieu") }}
+    {{ form_row(form.location) }}
+</div>
+
 <!-- DESCRIPTION -->
 <div>
     {{ form_label(form.description, "Description") }}
     {{ form_row(form.description) }}
 </div>
 
-<!-- LOCATION -->
+<!-- JEUX -->
 <div>
-    {{ form_label(form.location, "Lieu") }}
-    {{ form_row(form.location) }}
+    {{ form_label(form.pickedGames, "Jeux proposés") }}
+    {{ form_row(form.pickedGames) }}
 </div>
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

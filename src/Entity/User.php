@@ -280,6 +280,19 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getSex(): ?string
+    {
+        return $this->sex;
+    }
+
+    public function setSex(?string $sex): self
+    {
+        $this->sex = $sex;
+
+        return $this;
+    }
+
+
     /**
      * @return Collection|Event[]
      */
@@ -331,18 +344,6 @@ class User implements UserInterface
                 $organizedEvent->setAuthor(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getSex(): ?string
-    {
-        return $this->sex;
-    }
-
-    public function setSex(?string $sex): self
-    {
-        $this->sex = $sex;
 
         return $this;
     }

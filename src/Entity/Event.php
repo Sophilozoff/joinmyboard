@@ -80,9 +80,15 @@ class Event
      */
     private $location;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Boardgame::class, inversedBy="events")
+     */
+    private $pickedGames;
+
     public function __construct()
     {
         $this->participant = new ArrayCollection();
+        $this->pickedGames = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -232,6 +238,30 @@ class Event
     public function setLocation(string $location): self
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Boardgame[]
+     */
+    public function getPickedGames(): Collection
+    {
+        return $this->pickedGames;
+    }
+
+    public function addPickedGame(Boardgame $pickedGame): self
+    {
+        if (!$this->pickedGames->contains($pickedGame)) {
+            $this->pickedGames[] = $pickedGame;
+        }
+
+        return $this;
+    }
+
+    public function removePickedGame(Boardgame $pickedGame): self
+    {
+        $this->pickedGames->removeElement($pickedGame);
 
         return $this;
     }
