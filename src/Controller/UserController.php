@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Boardgame;
 use App\Form\UserType;
-use App\Repository\UserRepository;
 use App\Repository\BoardgameRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -85,8 +84,7 @@ class UserController extends AbstractController
 
     
     /**
-     * @Route("/friendslist-add/{id}", name="friendlist_add", methods={"GET"})
-     * @ParamConverter("id", options={"id": "id"})
+     * @Route("/friendslist-add/{id}", name="friendslist_add", methods={"GET"})
      * @IsGranted("ROLE_USER")
      */
     public function friendslist_add(User $user): Response
@@ -95,7 +93,7 @@ class UserController extends AbstractController
         $currentUser->addFriend($user);
         $this->getDoctrine()->getManager()->flush();
 
-        return $this->redirectToRoute('user_index');
+        return $this->redirectToRoute('app_index');
 
     }
 

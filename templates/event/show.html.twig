@@ -39,7 +39,13 @@
             <ul>
                 {% for subscriber in event.subscriber %}
                 <li class="valign-wrapper container-fluid row">
-                    <a href="{{ path('friendlist_add', {'id': subscriber.id}) }}" class="addcircle col s1"><i class="material-icons">add_circle_outline</i></a>
+                    {% if subscriber in app.user.friends %}
+                    <i class="material-icons icon col s1 lime-text text-darken-3">star</i>
+                    {% else %}
+                    <a href="{{ path('friendslist_add', {'id': subscriber.id }) }}" class="center icon col s1">
+                        <i class="material-icons teal-text text-darken-3">add_circle</i>
+                    </a>
+                    {% endif %}
                     <a class="subscriber-link col s9" href="{{ path('user_show', {'id': subscriber.id})}}">
                         <div class="subscriber z-depth-2 row valign-wrapper">
                             <div class="col s2">
@@ -59,7 +65,13 @@
             <ul>
                 {% for pickedGame in event.pickedGames %}
                 <li class="valign-wrapper container-fluid row">
-                    <a href="{{ path('boardgameslist_add', {'id': pickedGame.id}) }}" class="addcircle col s1"><i class="material-icons">add_circle_outline</i></a>
+                    {% if pickedGame in app.user.favoriteGames %}
+                    <i class="material-icons icon col s1 lime-text text-darken-3">star</i>
+                    {% else %}
+                    <a href="{{ path('boardgameslist_add', {'id': pickedGame.id }) }}" class="center icon col s1">
+                        <i class="material-icons teal-text text-darken-3">add_circle</i>
+                    </a>
+                    {% endif %}
                         <div class="picked-game col s9 z-depth-2 row valign-wrapper">
                             <div class="col s2">
                                 <img class="avatar" src="{{ pickedGame.image }}">
@@ -92,7 +104,7 @@
         font-size: 2em;
         margin-bottom: 25px;
     }
-    .addcircle, .picked-game, .subscriber-link{
+    .icon, .picked-game, .subscriber-link{
         margin-left: 10px !important;
         
     }

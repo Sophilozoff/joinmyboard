@@ -3,13 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Entity\Boardgame;
+use App\Entity\User;
 use App\Form\EventType;
-use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/event")
@@ -44,8 +46,8 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="event_show", methods={"GET"})
-     */
+    * @Route("/show/{id}", name="event_show", methods={"GET"}, requirements={"id"="\d+"})  
+    */
     public function show(Event $event): Response
     {
         return $this->render('event/show.html.twig', [
