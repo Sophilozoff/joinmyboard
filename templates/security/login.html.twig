@@ -19,15 +19,15 @@
 
 {% block body %}
    <!-- LOGO + TITRE DU SITE -->
-   <div class="valign-wrapper row hide-on-med-and-down  red darken-2" >
-    <img id="logo" class="col s3" src="{{ asset("/img/logoTest.png" )}}"> 
-    <a id="title" href="{{ path('app_index') }}" class="col s6 hide-on-med-and-down amber-text text-lighten-3">Join My Board</a>
+   <div class="valign-wrapper row red darken-2" >
+    <img id="logo" class="col s3 hide-on-med-and-down" src="{{ asset("/img/logoTest.png" )}}"> 
+    <a id="title" href="{{ path('app_index') }}" class="col s12 m6 amber-text text-lighten-3 center">JOIN MY BOARD</a>
 </div>
 <!-- LOGO + TITRE END -->
 <div id="page" class="container grey lighten-5">
     <div id="carousel-connection" class="row grey lighten-5">
         <!-- CAROUSEL -->
-        <div class="col s12 m12 l6">
+        <div class="col s12 m12 l6   hide-on-med-and-down">
             <div class="carousel carousel-slider">
                 <div class="carousel-item white-text">
                     <img src="{{ asset("/img/carousel1.jpg" )}}" alt="boardgame en flat design">
@@ -115,8 +115,9 @@
 }
 #title{
     margin: auto;
-    font-size: 3.4em;
+    font-size: 3em;
     font-family: "Good Morning";
+    padding: 20px;
 }
     #page{
         padding-bottom: 100px;
@@ -181,18 +182,6 @@
         }
     }
 
-    @media screen and(max-width: 640px) {
-        #resumeHome {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card-resumeHome {
-            width: 100%;
-        }
-    }
-
     @media screen and(max-width: 1240px) {
         #resumeHome {
             display: flex;
@@ -202,6 +191,9 @@
 
         .card-resumeHome {
             width: 100%;
+        }
+        #carousel-connection{
+            visibility: hidden;
         }
     }
 </style>
