@@ -15,6 +15,18 @@
                 <p>Lieu : {{ event.location }}</p>
                 <p>Organisé par : {{event.author}}</p> 
                 <p>{{ event.description }}</p> 
+                <div>
+                    <!-- S'il l'évènement est à venir -->
+                    {% if event.dateEvent > date() and app.user != event.author %}
+                    <!-- Si utilisater connecté et déjà dans la lsite des participants -->
+                    {% if app.user and app.user in event.subscriber %}
+                    <a href="{{ path("front_unsub_event", {"id":event.id})}}" class="btn red darken-3">Se désinscrire</a>
+                    <!-- S'il reste des places -->
+                    {% elseif event.subscriber|length < event.nbMaxPlayers %} <a href="{{ path("front_sub_event",
+                        {"id":event.id})}}" class="btn">S'inscrire</a>
+                        {% endif %}
+                        {% endif %}
+                </div>
             </div>
             <div  class="col s12 m6 l6">
                 <img id="image" src="{{ asset('/img/images/'~ event.image )}}" alt="{{ event.title }}">
