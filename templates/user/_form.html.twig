@@ -3,7 +3,7 @@
 
     <div class="col s12 m6">
         <!-- IDENTIFIANT -->
-        {{ form_label(form.username, "Identifiant") }}
+        {{ form_label(form.username, "Identifiant, 5 caractères minimum") }}
         {{ form_row(form.username) }}
         <!-- MOT DE PASSE -->
         {{ form_row(form.password.first) }}
@@ -23,7 +23,7 @@
         </div>
         <!-- DATE DE NAISSANCE -->
         <div>
-            {{ form_label(form.dateOfBirth, "Date de naissance") }}
+            {{ form_label(form.dateOfBirth, "Date de naissance, format dd/mm/yyyy") }}
             {{ form_row(form.dateOfBirth) }}
         </div>
     </div>
@@ -36,10 +36,6 @@
     {{ form_row(form.roles) }}
 </div>
 {% endif %}
-
-
-
-
 
 <!-- PHOTO DE PROFIL -->
 <div>

@@ -51,6 +51,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string")
+     * 
      */
     private $dateOfBirth;
 
@@ -74,21 +75,22 @@ class User implements UserInterface
     
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 50,
+     *      max = 500,
+     *      minMessage = "La description doit contenir au minimum 50 caractères",
+     *      maxMessage = "La description ne peiut pas contenir plus de 500 caractères")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * * @Assert\Email(
+     * @Assert\Email(
      *     message = "L'adresse email'{{ value }}' n'est pas correcte."
      * )
-     * Assert\NotBlank
-     * @Assert\Length(
-     *      min = 50,
-     *      max = 50,
-     *      minMessage = "La description doit contenir au minimum 50 caractères",
-     *      maxMessage = "La description ne peiut pas contenir plus de 500 caractères"
-     * )
+     * @Assert\NotBlank
+     * 
      */
     private $email;
 

@@ -1,7 +1,7 @@
-<div class="col s12 m6 l4">
+<div class="block col s12 m6 l4">
     <div class="card z-depth-4">
         <div class="card-image">
-            <img src="{{ asset('/img/images/'~ event.image )}}" alt="{{ event.title }}">
+            <img class="image" src="{{ asset('/img/images/'~ event.image )}}" alt="{{ event.title }}">
             <span class="card-title title">{{ event.title }}</span>
             <!-- <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a> -->
         </div>
@@ -17,7 +17,7 @@
             </div>
             <p class="card-text">Lieu : {{event.location}}</p>
             <!-- le pipe u.truncate permet d'afficher les 150 premiers caractères, de finir par ... et de ne pas couper le dernier mot -->
-            <p class="card-text">Description : {{ event.description|u.truncate(100, "...", false) }}</p>
+            <p class="card-text">Description : {{ event.description|u.truncate(25, "...", false) }}</p>
 
             <!-- si event à venir et avec des places libres -->
             {% if event.dateEvent > date() and event.subscriber|length < event.nbMaxPlayers %} <p class="card-text">
@@ -27,7 +27,7 @@
                 <p>Complet</p>
                 {% endif %}
         </div>
-        <div class="card-action text">
+        <div class="card-action">
             <a href="{{ path('event_show', {'id': event.id}) }}">Voir l'évènement</a>
         </div>
 
@@ -54,7 +54,17 @@
     border-radius: 35px;
     border: whitesmoke 3px solid;
     padding: 5px 15px;
+    font-size: 1em;
+
 }
+.block{
+    max-height: 500px;
+    font-size: 1em;
+}
+.image{
+    height: 250px;
+}
+
 .card-image{
     max-height: 300px;
     max-width: 500px;

@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=EventRepository::class)
@@ -24,6 +26,7 @@ class Event
 
     /**
      * @ORM\Column(type="string", length=255)
+     * min = 5,
      */
     private $title;
 
@@ -67,6 +70,12 @@ class Event
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 50,
+     *      max = 500,
+     *      minMessage = "La description doit contenir au minimum 50 caractères",
+     *      maxMessage = "La description ne peiut pas contenir plus de 500 caractères")
      */
     private $description;
 

@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class UserType extends AbstractType
 {
@@ -54,8 +55,8 @@ class UserType extends AbstractType
                 "multiple" => false
             ])
             ->add('dateOfBirth', null, [
-                'label' => false
-            ])
+                'label'=>false,
+                ])
             ->add('avatarFile', VichImageType::class, [
                 'label' => false
             ])

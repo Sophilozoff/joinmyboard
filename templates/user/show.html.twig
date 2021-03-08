@@ -37,7 +37,7 @@
             <div class="col s4 text container-fluid">
                 <div class="col s12">
                     <div class="center">
-                        <span class="number  teal darken-2"></span>
+                        <span class="number teal darken-2"></span>
                     </div>
                 </div>
                 <div class="">avis</div>
@@ -46,8 +46,16 @@
     </div>
 
     <div class="text description">
-        <h2 class="title center z-depth-2">Description : </h2>
-        <p>{{ user.description }}</p>
+        <h2 class="title center z-depth-2">Informations </h2>
+        <p>Date de naissance : {{ user.dateOfBirth }}</p>
+        <p>Description : {{ user.description }}</p>
+        <p>Les jeux favoris : </p>
+        {% for favoriteGame in user.favoriteGames %}
+        <div class="row valign-wrapper">
+            <img class="game-image col s2" src="{{ favoriteGame.image }}" alt="{{ favoriteGame.name }}">
+            <p class="col s10">{{ favoriteGame.name }}</p>
+        </div>
+        {% endfor %}
     </div>
 
     {% if app.user.id == user.id %}
