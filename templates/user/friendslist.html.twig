@@ -6,7 +6,16 @@
 <h1>Ma liste d'amis</h1>
 
 {% for friend in user.friends %}
-Pseudo : {{ friend.username }}
+<div class="friend container row valign-wrapper">
+        <img class="col s2" src="{{ asset('/img/avatars/'~ friend.avatar )}}" alt="{{ friend.username }}">
+        <p class="col s7">{{ friend.username }}</p>
+        <a href="{{ path("friend_delete", {"id":friend.id})}}" class="btn red darken-3">
+            <i class="material-icons">delete</i>
+        </a>
+
+
+</div>
+
 {% endfor %}
 
 </div>
@@ -17,6 +26,13 @@ Pseudo : {{ friend.username }}
     padding: 40px 50px;
     margin-bottom: 10px;
     }
-
+.friend{
+    color: white;
+    border-radius: 15px;
+    border: whitesmoke 3px solid;
+    margin: 10px;
+    background-color:#059481;
+    font-size: 1.5em;
+}
 </style>
 {% endblock %}

@@ -97,6 +97,20 @@ class UserController extends AbstractController
 
     }
 
+    /**
+     * @Route("/friendslist-delete/{id}", name="friend_delete", methods={"GET"})
+     * @ParamConverter("id", options={"id": "id"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function deleteFriend(Request $request, User $user): Response
+    {
+        $currentUser = $this->getUser();
+        $currentUser->removeFriend($user);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('app_index');
+    }
+
      /**
      * @Route("/boardgames-add/{id}", name="boardgameslist_add", methods={"GET"})
      * @ParamConverter("id", options={"id": "id"})
